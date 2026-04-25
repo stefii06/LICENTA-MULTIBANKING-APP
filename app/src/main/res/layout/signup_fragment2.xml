@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F4FF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Securitate cont"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1A3C6E"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creează o parolă puternică"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="32dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Parolă"
+            android:layout_marginBottom="8dp"
+            app:boxStrokeColor="#1A3C6E"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Cerinte parola -->
+        <LinearLayout
+            android:id="@+id/layoutRequirements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvReqLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✗  Minim 8 caractere"
+                android:textColor="#E53935"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tvReqUpper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✗  Cel puțin o literă mare"
+                android:textColor="#E53935"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvReqLower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✗  Cel puțin o literă mică"
+                android:textColor="#E53935"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvReqNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✗  Cel puțin o cifră"
+                android:textColor="#E53935"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/tvReqSpecial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✗  Cel puțin un caracter special (!@#$%)"
+                android:textColor="#E53935"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Indicator putere parola -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Putere parolă:"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="4dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressPassword"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#E53935"
+            android:layout_marginBottom="24dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirmPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmă parola"
+            android:layout_marginBottom="32dp"
+            app:boxStrokeColor="#1A3C6E"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Continuă"
+            android:backgroundTint="#1A3C6E"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Înapoi"
+            android:backgroundTint="#4A90D9"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

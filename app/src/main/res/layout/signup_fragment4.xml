@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F4FF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autentificare rapidă"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1A3C6E"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Configurează metode rapide de acces"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- PIN Setup -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creează cod PIN"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1A3C6E"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/pin1"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/pin2"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/pin3"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/pin4"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/pin5"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"
+                android:layout_marginEnd="8dp"/>
+
+            <EditText
+                android:id="@+id/pin6"
+                android:layout_width="50dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:maxLength="1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:background="@android:drawable/editbox_background"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acest PIN îl vei folosi pentru autentificare rapidă"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Biometrie -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autentificare biometrică"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1A3C6E"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Folosește amprenta sau Face ID pentru acces rapid și securizat"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_marginBottom="16dp"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchBiometric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activează autentificarea biometrică"
+            android:textColor="#1A3C6E"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Continuă"
+            android:backgroundTint="#1A3C6E"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Sari peste"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#1A3C6E"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Înapoi"
+            android:backgroundTint="#4A90D9"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

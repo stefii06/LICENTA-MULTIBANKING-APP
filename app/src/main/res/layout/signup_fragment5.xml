@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#F0F4FF">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="✓"
+        android:textSize="60sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="#4CAF50"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cont creat cu succes!"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#1A3C6E"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvWelcomeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bine ai venit!"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_marginBottom="48dp"/>
+
+    <Button
+        android:id="@+id/btnGoToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Mergi la Sign In"
+        android:backgroundTint="#1A3C6E"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"/>
+
+</LinearLayout>

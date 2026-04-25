@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#F0F4FF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introdu codul PIN"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1A3C6E"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introdu PIN-ul setat la înregistrare"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Indicatori PIN -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="48dp">
+
+        <View android:id="@+id/dot1"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"
+            android:layout_marginEnd="12dp"/>
+
+        <View android:id="@+id/dot2"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"
+            android:layout_marginEnd="12dp"/>
+
+        <View android:id="@+id/dot3"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"
+            android:layout_marginEnd="12dp"/>
+
+        <View android:id="@+id/dot4"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"
+            android:layout_marginEnd="12dp"/>
+
+        <View android:id="@+id/dot5"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"
+            android:layout_marginEnd="12dp"/>
+
+        <View android:id="@+id/dot6"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="#CCCCCC"/>
+
+    </LinearLayout>
+
+    <!-- Tastatura PIN -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:layout_marginBottom="24dp">
+
+        <Button android:id="@+id/btn1" android:text="1" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn2" android:text="2" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn3" android:text="3" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn4" android:text="4" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn5" android:text="5" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn6" android:text="6" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn7" android:text="7" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn8" android:text="8" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn9" android:text="9" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btnClear" android:text="✗" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#E53935" android:textColor="#FFFFFF" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btn0" android:text="0" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#FFFFFF" android:textColor="#1A3C6E" android:layout_margin="6dp"/>
+        <Button android:id="@+id/btnDelete" android:text="⌫" android:layout_width="80dp" android:layout_height="80dp" android:textSize="24sp" android:backgroundTint="#4A90D9" android:textColor="#FFFFFF" android:layout_margin="6dp"/>
+
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/tvUsePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Folosește parola în schimb"
+        android:textColor="#4A90D9"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tvUseBiometric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔒 Folosește amprenta"
+        android:textColor="#4A90D9"
+        android:textSize="14sp"
+        android:layout_marginTop="12dp"/>
+
+</LinearLayout>
