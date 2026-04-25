@@ -40,4 +40,21 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // ViewModel + LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.7.0")
+
+// Navigation
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
+
+// Biometrics
+    implementation("androidx.biometric:biometric:1.1.0")
+
+//Components visual
+    implementation("com.google.android.material:material:1.11.0")
+
+//Country Code Picker
+    implementation("com.hbb20:ccp:2.7.0")
 }
