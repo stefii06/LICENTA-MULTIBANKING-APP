@@ -57,4 +57,7 @@ dependencies {
 
 //Country Code Picker
     implementation("com.hbb20:ccp:2.7.0")
+
+    //json
+    implementation("com.google.code.gson:gson:2.10.1")
 }
