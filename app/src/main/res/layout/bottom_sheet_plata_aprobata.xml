@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="12dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Card preview -->
+    <LinearLayout
+        android:id="@+id/layoutCardAprobat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvCardAprobatBanca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BCR — Visa Debit"
+            android:textColor="#B0F0B0"
+            android:textSize="10sp"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tvCardAprobatNumar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="•••• •••• •••• 3377"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvCardAprobatTitular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ioana Stefania"
+                android:textColor="#B0F0B0"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:id="@+id/tvCardAprobatTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VISA"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Loading si aprobare -->
+    <LinearLayout
+        android:id="@+id/layoutLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <ProgressBar
+            android:id="@+id/progressPlata"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Se proceseaza plata..."
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aproximeaza telefonul de terminal"
+            android:textColor="#7A9CC0"
+            android:textSize="11sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <!-- Rezultat aprobare -->
+    <LinearLayout
+        android:id="@+id/layoutAprobat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="✓"
+            android:textColor="#4CAF50"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:background="#1B5E20"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plata aprobata!"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Detalii tranzactie -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#12203A"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Card"
+                    android:textColor="#7A9CC0"
+                    android:textSize="11sp"/>
+
+                <TextView
+                    android:id="@+id/tvDetaliiCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BCR •••• 3377"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Categorie"
+                    android:textColor="#7A9CC0"
+                    android:textSize="11sp"/>
+
+                <TextView
+                    android:id="@+id/tvDetaliiCategorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mancare"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Data"
+                    android:textColor="#7A9CC0"
+                    android:textSize="11sp"/>
+
+                <TextView
+                    android:id="@+id/tvDetaliiData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="02/05/2026"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnInchidePlata"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Inchide"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4A90D9"
+        android:visibility="gone"/>
+
+</LinearLayout>

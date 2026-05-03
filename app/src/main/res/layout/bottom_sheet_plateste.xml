@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="12dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Titlu -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plateste"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alege cardul pentru plata"
+        android:textColor="#7A9CC0"
+        android:textSize="11sp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Slider carduri -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCarduriPlateste"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:clipToPadding="false"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Card selectat preview -->
+    <LinearLayout
+        android:id="@+id/layoutCardPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvCardPreviewBanca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BCR — Visa Debit"
+            android:textColor="#B0F0B0"
+            android:textSize="10sp"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView
+            android:id="@+id/tvCardPreviewNumar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="•••• •••• •••• 3377"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvCardPreviewTitular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ioana Stefania"
+                android:textColor="#B0F0B0"
+                android:textSize="11sp"/>
+
+            <TextView
+                android:id="@+id/tvCardPreviewTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VISA"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Buton continua -->
+    <Button
+        android:id="@+id/btnContinuaPlateste"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Continua"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4A90D9"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Buton anuleaza -->
+    <Button
+        android:id="@+id/btnAnuleazaPlateste"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Anuleaza"
+        android:textColor="#E53935"
+        android:backgroundTint="#12203A"/>
+
+</LinearLayout>
