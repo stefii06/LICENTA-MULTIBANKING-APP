@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginEnd="12dp">
+
+    <TextView
+        android:id="@+id/tvInitiale"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="AM"
+        android:textColor="#B0C8F0"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:background="#1A3C6E"/>
+
+    <TextView
+        android:id="@+id/tvNume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nume"
+        android:textColor="#7A9CC0"
+        android:textSize="10sp"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>
