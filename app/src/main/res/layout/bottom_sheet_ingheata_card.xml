@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="12dp">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Starea 1: Confirmare -->
+    <LinearLayout
+        android:id="@+id/layoutConfirmareIngheata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:background="#1A3C6E"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_profile"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvIngheataTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingheata cardul?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvIngheataDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cardul nu va putea fi folosit pentru plati pana la dezghetare"
+            android:textColor="#7A9CC0"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnConfirmaIngheata"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Da, ingheata"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#E53935"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnAnuleazaIngheata"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Anuleaza"
+            android:textColor="#7A9CC0"
+            android:backgroundTint="#12203A"/>
+
+    </LinearLayout>
+
+    <!-- Starea 2: Confirmat -->
+    <LinearLayout
+        android:id="@+id/layoutInghetatConfirmat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:background="#1B5E20"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✓"
+                android:textColor="#4CAF50"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInghetatSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card inghetat!"
+            android:textColor="#4CAF50"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apasa din nou Ingheata pentru a debloca"
+            android:textColor="#7A9CC0"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnInchideIngheata"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Inchide"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4A90D9"/>
+
+    </LinearLayout>
+
+</LinearLayout>

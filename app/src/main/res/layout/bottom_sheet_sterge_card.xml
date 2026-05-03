@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="12dp">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="#4A0000"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp">
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_transactions"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sterge cardul?"
+        android:textColor="#E53935"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvStergeDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cardul va fi eliminat din aplicatie. Aceasta actiune nu poate fi anulata."
+        android:textColor="#7A9CC0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btnConfirmaSterge"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Da, sterge"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#E53935"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnAnuleazaSterge"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Anuleaza"
+        android:textColor="#7A9CC0"
+        android:backgroundTint="#12203A"/>
+
+</LinearLayout>
