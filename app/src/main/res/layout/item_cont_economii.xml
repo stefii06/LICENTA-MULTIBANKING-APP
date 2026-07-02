@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/tvIconitaEconomii"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNumeContEconomii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vacanta Grecia"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvInfoContEconomii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BCR • 4% • Manual"
+                android:textColor="#7A9CC0"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/tvSoldEconomii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500 RON"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvProcentEconomii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16.7%"
+                android:textColor="#4CAF50"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressEconomii"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:max="100"
+        android:progress="17"
+        android:progressTint="#4CAF50"
+        android:layout_marginBottom="4dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvObiectivEconomii"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="obiectiv: 3,000 RON"
+            android:textColor="#7A9CC0"
+            android:textSize="9sp"/>
+
+        <TextView
+            android:id="@+id/tvDataTintaEconomii"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tinta: Iun 2026"
+            android:textColor="#4A90D9"
+            android:textSize="9sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

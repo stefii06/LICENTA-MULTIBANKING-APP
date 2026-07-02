@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +33,8 @@ public class AdaugaContactBottomSheet extends BottomSheetDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.bottom_sheet_adauga_contact, container, false);
     }
 
@@ -42,6 +46,17 @@ public class AdaugaContactBottomSheet extends BottomSheetDialogFragment {
         TextInputEditText etPrenume = view.findViewById(R.id.etPrenumeContact);
         TextInputEditText etIban = view.findViewById(R.id.etIbanContact);
         TextInputEditText etNota = view.findViewById(R.id.etNotaContact);
+        EditText etTelefon = view.findViewById(R.id.etTelefonContact);
+        Spinner spinnerPrefix = view.findViewById(R.id.spinnerPrefix);
+
+        // Setup prefix tara
+        String[] prefixuri = {"+40", "+44", "+49", "+33", "+39", "+1", "+7"};
+        ArrayAdapter<String> prefixAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                prefixuri);
+        prefixAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPrefix.setAdapter(prefixAdapter);
 
         Button btnSalveaza = view.findViewById(R.id.btnSalveazaContact);
         Button btnAnuleaza = view.findViewById(R.id.btnAnuleazaContact);
@@ -51,21 +66,20 @@ public class AdaugaContactBottomSheet extends BottomSheetDialogFragment {
             String prenume = etPrenume.getText().toString().trim();
             String iban = etIban.getText().toString().trim();
             String nota = etNota.getText().toString().trim();
+            String telefonRaw = etTelefon.getText().toString().trim();
+            String prefix = spinnerPrefix.getSelectedItem().toString();
+            String telefon = telefonRaw.isEmpty() ? "" : prefix + " " + telefonRaw;
 
-            if (nume.isEmpty() || prenume.isEmpty() || iban.isEmpty()) {
-                Toast.makeText(getContext(), "Completeaza numele, prenumele si IBAN-ul!", Toast.LENGTH_SHORT).show();
+            if (nume.isEmpty() || prenume.isEmpty()) {
+                Toast.makeText(getContext(), "Completeaza cel putin numele si prenumele!",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Contact contact = new Contact(nume, prenume, iban, nota);
+            Contact contact = new Contact(nume, prenume, iban, nota, telefon);
             ContactRepository.getInstance(getContext()).adaugaContact(contact);
-
             Toast.makeText(getContext(), "Contact adaugat!", Toast.LENGTH_SHORT).show();
-
-            if (listener != null) {
-                listener.onContactAdaugat();
-            }
-
+            if (listener != null) listener.onContactAdaugat();
             dismiss();
         });
 

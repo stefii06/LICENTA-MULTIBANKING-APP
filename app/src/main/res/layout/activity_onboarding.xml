@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#12203A">
+
+    <!-- Progress bar vizual cu 4 segmente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="48dp"
+        android:paddingHorizontal="24dp"
+        android:gravity="center"
+        android:id="@+id/layoutProgressOnboarding">
+
+        <View android:id="@+id/segment1"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#4A90D9"
+            android:layout_marginEnd="4dp"/>
+
+        <View android:id="@+id/segment2"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#1A3C6E"
+            android:layout_marginEnd="4dp"/>
+
+        <View android:id="@+id/segment3"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#1A3C6E"
+            android:layout_marginEnd="4dp"/>
+
+        <View android:id="@+id/segment4"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:layout_weight="1"
+            android:background="#1A3C6E"/>
+
+    </LinearLayout>
+
+    <!-- Container fragmente -->
+    <FrameLayout
+        android:id="@+id/onboardingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -3,68 +3,251 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#1A2E4A"
+    android:background="#0D1829"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="24dp"
-    android:paddingTop="12dp">
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
 
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
-        android:background="#7A9CC0"
+        android:background="#2A4070"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"/>
 
+    <!-- Layout optiuni — vizibil initial -->
     <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:background="#4A0000"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp">
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_transactions"/>
+        android:id="@+id/layoutOptiuniSterge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elimini cardul?"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvStergeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BCR •••• 4521"
+            android:textColor="#7A9CC0"
+            android:textSize="11sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Optiunea 1: Elimina din FinMind -->
+        <LinearLayout
+            android:id="@+id/btnStergeFinMind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#200D0D"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="✕"
+                android:textColor="#E57373"
+                android:textSize="16sp"
+                android:background="#3A1010"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Elimină din FinMind"
+                    android:textColor="#E57373"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contul bancar real rămâne intact"
+                    android:textColor="#7A9CC0"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Optiunea 2: La banca -->
+        <LinearLayout
+            android:id="@+id/btnStergeBanca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#0D2A1A"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:gravity="center"
+                android:text="↗"
+                android:textColor="#4CAF50"
+                android:textSize="16sp"
+                android:background="#0D3A20"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Închide cont la bancă"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvStergeBancaNume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deschide aplicația băncii"
+                    android:textColor="#7A9CC0"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAnuleazaSterge"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Anulează"
+            android:textColor="#7A9CC0"
+            android:backgroundTint="#12203A"/>
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Layout confirmare — ascuns initial -->
+    <LinearLayout
+        android:id="@+id/layoutConfirmareSterge"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sterge cardul?"
-        android:textColor="#E53935"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/tvStergeDesc"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#1A1000"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmă eliminarea"
+                android:textColor="#FFB74D"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp"/>
+
+            <TextView
+                android:id="@+id/tvConfirmDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contul va dispărea din FinMind."
+                android:textColor="#7A9CC0"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.4"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnConfirmaSterge"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Elimină din FinMind"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#C62828"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnAnuleazaConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Anulează"
+            android:textColor="#7A9CC0"
+            android:backgroundTint="#12203A"/>
+
+    </LinearLayout>
+
+    <!-- Layout succes — ascuns initial -->
+    <LinearLayout
+        android:id="@+id/layoutSuccesSterge"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cardul va fi eliminat din aplicatie. Aceasta actiune nu poate fi anulata."
-        android:textColor="#7A9CC0"
-        android:textSize="12sp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/btnConfirmaSterge"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Da, sterge"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#E53935"
-        android:layout_marginBottom="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#0D3020"
+            android:padding="20dp"
+            android:layout_marginBottom="12dp">
 
-    <Button
-        android:id="@+id/btnAnuleazaSterge"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Anuleaza"
-        android:textColor="#7A9CC0"
-        android:backgroundTint="#12203A"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card eliminat din FinMind"
+                android:textColor="#4CAF50"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contul bancar real nu a fost afectat."
+                android:textColor="#7A9CC0"
+                android:textSize="10sp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnInchideSterge"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Închide"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4A90D9"/>
+
+    </LinearLayout>
 
 </LinearLayout>

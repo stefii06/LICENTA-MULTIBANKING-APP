@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="#1A2E4A"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvEmojiAbonament"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:text="🎬"
+        android:textSize="18sp"
+        android:background="#12203A"
+        android:layout_marginEnd="10dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvNumeAbonament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Netflix"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:id="@+id/tvBadgeAbonament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Din recurente"
+                android:textColor="#4A90D9"
+                android:textSize="9sp"
+                android:background="#1A3C6E"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvInfoAbonament"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lunar • pe 15 • ING •••• 4521"
+            android:textColor="#7A9CC0"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvSumaAbonament"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-45 RON"
+            android:textColor="#E53935"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvStatusAbonament"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activ"
+            android:textColor="#4CAF50"
+            android:textSize="9sp"
+            android:background="#1B5E20"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

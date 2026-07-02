@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.stefi.licentamultibankingapp.R;
 
+import com.stefi.licentamultibankingapp.model.MockDataGenerator;
 import com.stefi.licentamultibankingapp.ui.dashboard.home.HomeFragment;
 
 import com.stefi.licentamultibankingapp.ui.dashboard.CardsFragment;
@@ -21,6 +22,8 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        new Thread(() -> MockDataGenerator.genereazaDateMock()).start();
 
         // Pornim cu HomeFragment (il cream dupa)
         loadFragment(new HomeFragment());

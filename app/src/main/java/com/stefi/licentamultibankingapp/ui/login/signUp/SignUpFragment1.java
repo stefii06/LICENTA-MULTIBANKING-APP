@@ -47,6 +47,15 @@ public class SignUpFragment1 extends Fragment {
                 String email = etEmail.getText().toString().trim();
                 String phone = etPhone.getText().toString().trim();
 
+                // Salvam temporar — la primul SignIn se muta in user_data_<userId>
+                requireActivity().getSharedPreferences("user_data_temp", android.content.Context.MODE_PRIVATE)
+                        .edit()
+                        .putString("firstName", firstName)
+                        .putString("lastName", lastName)
+                        .putString("email", email)
+                        .putString("phone", phone)
+                        .apply();
+
                 Bundle bundle = new Bundle();
                 bundle.putString("firstName", firstName);
                 bundle.putString("lastName", lastName);
@@ -63,33 +72,61 @@ public class SignUpFragment1 extends Fragment {
     private boolean validateFields() {
         boolean valid = true;
 
-        if (etFirstName.getText().toString().trim().isEmpty()) {
+        String firstName = etFirstName.getText().toString().trim();
+        String lastName = etLastName.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
+
+        // Validare Nume
+        if (firstName.isEmpty()) {
             tilFirstName.setError("Numele este obligatoriu");
+            valid = false;
+        } else if (firstName.length() < 2) {
+            tilFirstName.setError("Numele trebuie să aibă minim 2 caractere");
+            valid = false;
+        } else if (!firstName.matches("[a-zA-ZăâîșțĂÂÎȘȚ ]+")) {
+            tilFirstName.setError("Numele poate conține doar litere");
             valid = false;
         } else {
             tilFirstName.setError(null);
         }
 
-        if (etLastName.getText().toString().trim().isEmpty()) {
+        // Validare Prenume
+        if (lastName.isEmpty()) {
             tilLastName.setError("Prenumele este obligatoriu");
+            valid = false;
+        } else if (lastName.length() < 2) {
+            tilLastName.setError("Prenumele trebuie să aibă minim 2 caractere");
+            valid = false;
+        } else if (!lastName.matches("[a-zA-ZăâîșțĂÂÎȘȚ ]+")) {
+            tilLastName.setError("Prenumele poate conține doar litere");
             valid = false;
         } else {
             tilLastName.setError(null);
         }
 
-        if (etEmail.getText().toString().trim().isEmpty()) {
+        // Validare Email
+        if (email.isEmpty()) {
             tilEmail.setError("Email-ul este obligatoriu");
             valid = false;
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString().trim()).matches()) {
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             tilEmail.setError("Email invalid");
             valid = false;
         } else {
             tilEmail.setError(null);
         }
 
-        if (etPhone.getText().toString().trim().isEmpty()) {
+        // Validare Telefon
+        if (phone.isEmpty()) {
             tilPhone.setError("Numărul de telefon este obligatoriu");
             valid = false;
+        } else if (!phone.matches("[0-9]+")) {
+            tilPhone.setError("Numărul de telefon poate conține doar cifre");
+            valid = false;
+        } else if (phone.length() < 7 || phone.length() > 15) {
+            tilPhone.setError("Număr de telefon invalid");
+            valid = false;
+
         } else {
             tilPhone.setError(null);
         }

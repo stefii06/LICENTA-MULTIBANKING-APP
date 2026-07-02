@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,14 +17,29 @@ public class ContacteAdapter extends RecyclerView.Adapter<ContacteAdapter.Contac
 
     private List<Contact> contacte;
     private OnAdaugaClick onAdaugaClick;
+    private OnContactClick onContactClick;
 
     public interface OnAdaugaClick {
         void onAdaugaClick();
     }
 
+    public interface OnContactClick {
+        void onContactClick(Contact contact);
+    }
+
+    // Constructor pentru HomeFragment — cu buton "+"
     public ContacteAdapter(List<Contact> contacte, OnAdaugaClick onAdaugaClick) {
         this.contacte = contacte;
         this.onAdaugaClick = onAdaugaClick;
+        this.onContactClick = null;
+    }
+
+    // Constructor pentru TrimiteBottomSheet — fara sau cu buton "+"
+    public ContacteAdapter(List<Contact> contacte, OnAdaugaClick onAdaugaClick,
+                           OnContactClick onContactClick) {
+        this.contacte = contacte;
+        this.onAdaugaClick = onAdaugaClick;
+        this.onContactClick = onContactClick;
     }
 
     @NonNull
@@ -38,25 +52,37 @@ public class ContacteAdapter extends RecyclerView.Adapter<ContacteAdapter.Contac
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        if (position == 0) {
-            // Primul item e butonul de adauga
-            holder.tvInitiale.setText("+");
-            holder.tvNume.setText("Adauga");
-            holder.itemView.setOnClickListener(v -> {
-                if (onAdaugaClick != null) onAdaugaClick.onAdaugaClick();
-            });
-        } else {
+        if (onAdaugaClick != null) {
+            // Cu buton "+" la pozitia 0
+            if (position == 0) {
+                holder.tvInitiale.setText("+");
+                holder.tvNume.setText("Adauga");
+                holder.itemView.setOnClickListener(v -> onAdaugaClick.onAdaugaClick());
+                return;
+            }
             Contact contact = contacte.get(position - 1);
             holder.tvInitiale.setText(contact.getInitiale());
             holder.tvNume.setText(contact.getNume());
-            holder.itemView.setOnClickListener(v ->
-                    Toast.makeText(v.getContext(), contact.getNumeComplet(), Toast.LENGTH_SHORT).show());
+            holder.itemView.setOnClickListener(v -> {
+                if (onContactClick != null) onContactClick.onContactClick(contact);
+            });
+        } else {
+            // Fara buton "+" — direct contactele de la pozitia 0
+            Contact contact = contacte.get(position);
+            holder.tvInitiale.setText(contact.getInitiale());
+            holder.tvNume.setText(contact.getNume());
+            holder.itemView.setOnClickListener(v -> {
+                if (onContactClick != null) onContactClick.onContactClick(contact);
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return contacte.size() + 1; // +1 pentru butonul de adauga
+        if (onAdaugaClick != null) {
+            return contacte.size() + 1;
+        }
+        return contacte.size();
     }
 
     public void actualizeazaLista(List<Contact> contacteNoi) {

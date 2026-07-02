@@ -1,6 +1,9 @@
 package com.stefi.licentamultibankingapp.ui.login.signUp;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +56,14 @@ public class SignUpFragment4 extends Fragment {
                 Toast.makeText(getContext(), "Introdu PIN-ul complet (6 cifre)!", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // Salvam PIN-ul si preferinta biometrica in SharedPreferences
+            requireActivity().getSharedPreferences("finmind_prefs", android.content.Context.MODE_PRIVATE)
+                    .edit()
+                    .putString("user_pin", pin)
+                    .putBoolean("biometric_enabled", switchBiometric.isChecked())
+                    .apply();
+
             Bundle bundle = new Bundle();
             bundle.putString("pin", pin);
             bundle.putBoolean("biometricEnabled", switchBiometric.isChecked());
@@ -77,7 +88,7 @@ public class SignUpFragment4 extends Fragment {
     private void setupPinFields() {
         for (int i = 0; i < pinFields.length; i++) {
             final int index = i;
-            pinFields[i].addTextChangedListener(new android.text.TextWatcher() {
+            pinFields[i].addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 

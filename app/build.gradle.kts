@@ -1,10 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.stefi.licentamultibankingapp"
     compileSdk = 36
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.stefi.licentamultibankingapp"
@@ -12,6 +17,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "ANTHROPIC_API_KEY", "\"${project.findProperty("ANTHROPIC_API_KEY") ?: ""}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,19 +52,34 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata:2.7.0")
 
-// Navigation
+    // Navigation
     implementation("androidx.navigation:navigation-fragment:2.7.7")
     implementation("androidx.navigation:navigation-ui:2.7.7")
 
-// Biometrics
+    // Biometrics
     implementation("androidx.biometric:biometric:1.1.0")
 
-//Components visual
+    // Components visual
     implementation("com.google.android.material:material:1.11.0")
 
-//Country Code Picker
+    // Country Code Picker
     implementation("com.hbb20:ccp:2.7.0")
 
-    //json
+    // JSON
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // MPAndroidChart - grafice
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // Firebase BoM - gestioneaza automat versiunile compatibile
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+
+    // Firebase Authentication
+    implementation("com.google.firebase:firebase-auth")
+
+    // Firebase Firestore
+    implementation("com.google.firebase:firebase-firestore")
 }

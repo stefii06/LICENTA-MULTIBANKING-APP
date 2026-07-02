@@ -2,14 +2,692 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     android:background="#12203A">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Header titlu -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tranzacții - Coming soon"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:paddingBottom="0dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tranzactii"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_statistics"
+            android:background="#1A2E4A"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <!-- Header luna FIX — vizibil pe toate taburile -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#1A2E4A"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/btnLunaAnterioara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="‹"
+            android:textColor="#4A90D9"
+            android:textSize="22sp"
+            android:padding="4dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvLunaSelectata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mai 2026"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/tvLunaSubtitlu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="luna curenta"
+                android:textColor="#7A9CC0"
+                android:textSize="9sp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnLunaUrmatoare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="›"
+            android:textColor="#4A90D9"
+            android:textSize="22sp"
+            android:padding="4dp"/>
+
+    </LinearLayout>
+
+    <!-- Tabs: Toate / Intrari / Iesiri -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1A2E4A"
+        android:padding="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:id="@+id/tabToate"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Toate"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:background="#4A90D9"/>
+
+        <TextView
+            android:id="@+id/tabIntrari"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="↑ Intrari"
+            android:textColor="#7A9CC0"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tabIesiri"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="↓ Iesiri"
+            android:textColor="#7A9CC0"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <!-- Continut tabs -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ==================== TAB TOATE ==================== -->
+            <LinearLayout
+                android:id="@+id/layoutTabToate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Sumar lunar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#1A2E4A"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvLabelTotalCheltuit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total cheltuit"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalCheltuit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 RON"
+                            android:textColor="#E53935"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tranzactii"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvNrTranzactii"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Filtre categorii scrollabile orizontal -->
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/layoutFiltre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"/>
+
+                </androidx.core.widget.NestedScrollView>
+
+                <!-- Insight -->
+                <LinearLayout
+                    android:id="@+id/layoutInsight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="#1A3C6E"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💡"
+                        android:textSize="18sp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tvInsight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <!-- Buton Cauta dupa zi (colapsat) -->
+                <LinearLayout
+                    android:id="@+id/layoutCautaBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="#1A2E4A"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔍"
+                        android:textSize="16sp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCautaLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cauta dupa zi"
+                            android:textColor="#4A90D9"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tvCautaSub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="selecteaza o zi din calendar"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCautaArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="▼"
+                        android:textColor="#4A90D9"
+                        android:textSize="10sp"/>
+
+                </LinearLayout>
+
+                <!-- Calendar zi specifica (ascuns implicit) -->
+                <LinearLayout
+                    android:id="@+id/layoutCalendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#1A2E4A"
+                    android:padding="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView
+                            android:id="@+id/btnLunaAnterioaraCalendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="‹"
+                            android:textColor="#4A90D9"
+                            android:textSize="18sp"
+                            android:padding="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvLunaCalendar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Mai 2026"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/btnLunaUrmatoareCalendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="›"
+                            android:textColor="#4A90D9"
+                            android:textSize="18sp"
+                            android:padding="4dp"/>
+
+                        <TextView
+                            android:id="@+id/tvInchideCalendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✕"
+                            android:textColor="#E05252"
+                            android:textSize="13sp"
+                            android:padding="4dp"
+                            android:layout_marginStart="8dp"/>
+
+                    </LinearLayout>
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="7"
+                        android:layout_marginBottom="4dp">
+
+                        <TextView android:text="L" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="M" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="M" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="J" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="V" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="S" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+                        <TextView android:text="D" android:textColor="#7A9CC0" android:textSize="10sp" android:gravity="center" android:layout_width="0dp" android:layout_columnWeight="1" android:layout_height="wrap_content"/>
+
+                    </GridLayout>
+
+                    <GridLayout
+                        android:id="@+id/gridZileCalendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="7"/>
+
+                </LinearLayout>
+
+                <!-- Bara filtru zi activ -->
+                <LinearLayout
+                    android:id="@+id/layoutFiltruActiv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="#1A3C6E"
+                    android:padding="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvFiltruActivText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="#7EB8F7"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/tvStergeFiltr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✕ Sterge filtru"
+                        android:textColor="#E05252"
+                        android:textSize="11sp"
+                        android:padding="4dp"/>
+
+                </LinearLayout>
+
+                <!-- Lista tranzactii grupata pe zile -->
+                <LinearLayout
+                    android:id="@+id/layoutListaTranzactii"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            <!-- ==================== TAB INTRARI ==================== -->
+            <LinearLayout
+                android:id="@+id/layoutTabIntrari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Sumar intrari -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#1A2E4A"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvLabelTotalIntrari"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total incasat"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalIntrari"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 RON"
+                            android:textColor="#4DCEA8"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nr intrari"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvNrIntrari"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Sortare intrari: 3 butoane -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/btnSortIntrariRecente"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="📅 Recente"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:background="#1A3C6E"
+                        android:layout_marginEnd="3dp"/>
+
+                    <TextView
+                        android:id="@+id/btnSortIntrariDesc"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="💰↓ Mare"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"
+                        android:background="#1A2E4A"
+                        android:layout_marginEnd="3dp"/>
+
+                    <TextView
+                        android:id="@+id/btnSortIntrariAsc"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="💰↑ Mic"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"
+                        android:background="#1A2E4A"/>
+
+                </LinearLayout>
+
+                <!-- Lista intrari -->
+                <LinearLayout
+                    android:id="@+id/layoutListaIntrari"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+            <!-- ==================== TAB IESIRI ==================== -->
+            <LinearLayout
+                android:id="@+id/layoutTabIesiri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Sumar iesiri -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#1A2E4A"
+                    android:padding="12dp"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvLabelTotalIesiri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total cheltuit"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalIesiri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 RON"
+                            android:textColor="#E53935"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="end">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nr iesiri"
+                            android:textColor="#7A9CC0"
+                            android:textSize="10sp"
+                            android:layout_marginBottom="3dp"/>
+
+                        <TextView
+                            android:id="@+id/tvNrIesiri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Sortare iesiri: 3 butoane -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/btnSortIesiriRecente"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="📅 Recente"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:background="#1A3C6E"
+                        android:layout_marginEnd="3dp"/>
+
+                    <TextView
+                        android:id="@+id/btnSortIesiriDesc"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="💰↓ Mare"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"
+                        android:background="#1A2E4A"
+                        android:layout_marginEnd="3dp"/>
+
+                    <TextView
+                        android:id="@+id/btnSortIesiriAsc"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="💰↑ Mic"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"
+                        android:background="#1A2E4A"/>
+
+                </LinearLayout>
+
+                <!-- Lista iesiri -->
+                <LinearLayout
+                    android:id="@+id/layoutListaIesiri"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

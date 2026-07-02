@@ -1,36 +1,48 @@
 package com.stefi.licentamultibankingapp.model;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import com.stefi.licentamultibankingapp.utils.FirestoreManager;
+import com.google.firebase.firestore.DocumentSnapshot;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactRepository {
 
-    private static final String PREFS_NAME = "contacte_prefs";
-    private static final String KEY_CONTACTE = "contacte";
-
     private static ContactRepository instance;
     private List<Contact> contacte = new ArrayList<>();
-    private SharedPreferences prefs;
-    private Gson gson = new Gson();
 
-    private ContactRepository(Context context) {
-        prefs = context.getApplicationContext()
-                .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        incarcaContacte();
-    }
+    private ContactRepository() {}
 
-    public static ContactRepository getInstance(Context context) {
+    public static ContactRepository getInstance() {
         if (instance == null) {
-            instance = new ContactRepository(context);
+            instance = new ContactRepository();
         }
         return instance;
+    }
+
+    // Versiunea cu Context nu mai e necesara dar o pastram pt compatibilitate
+    public static ContactRepository getInstance(android.content.Context context) {
+        return getInstance();
+    }
+
+    public static void reset() {
+        instance = null;
+    }
+
+    // Incarca contactele din Firestore
+    public void incarcaContacte(OnIncarcat callback) {
+        FirestoreManager.getInstance().contacte().get()
+                .addOnSuccessListener(snapshot -> {
+                    contacte.clear();
+                    for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                        Contact c = documentToContact(doc);
+                        contacte.add(c);
+                    }
+                    if (callback != null) callback.onIncarcat();
+                })
+                .addOnFailureListener(e -> {
+                    if (callback != null) callback.onIncarcat();
+                });
     }
 
     public List<Contact> getContacte() {
@@ -38,27 +50,43 @@ public class ContactRepository {
     }
 
     public void adaugaContact(Contact contact) {
-        contacte.add(contact);
-        salveazaContacte();
+        java.util.Map<String, Object> map = contactToMap(contact);
+        FirestoreManager.getInstance().contacte().add(map)
+                .addOnSuccessListener(ref -> {
+                    contact.setId(ref.getId());
+                    contacte.add(contact);
+                });
     }
 
-    private void salveazaContacte() {
-        String json = gson.toJson(contacte);
-        prefs.edit().putString(KEY_CONTACTE, json).apply();
+    public void stergeContact(String id) {
+        FirestoreManager.getInstance().contacte().document(id).delete()
+                .addOnSuccessListener(v ->
+                        contacte.removeIf(c -> id.equals(c.getId())));
     }
 
-    private void incarcaContacte() {
-        String json = prefs.getString(KEY_CONTACTE, null);
-        if (json != null) {
-            Type type = new TypeToken<List<Contact>>(){}.getType();
-            contacte = gson.fromJson(json, type);
-        } else {
-            // Contacte mock initiale
-            contacte.add(new Contact("Ana", "Maria", "RO49AAAA1B31007593840001", ""));
-            contacte.add(new Contact("Mihai", "Ionescu", "RO49AAAA1B31007593840002", ""));
-            contacte.add(new Contact("Ioana", "Pop", "RO49AAAA1B31007593840003", ""));
-            contacte.add(new Contact("Radu", "Dan", "RO49AAAA1B31007593840004", ""));
-            salveazaContacte();
-        }
+    private Contact documentToContact(DocumentSnapshot doc) {
+        Contact c = new Contact(
+                doc.getString("nume") != null ? doc.getString("nume") : "",
+                doc.getString("prenume") != null ? doc.getString("prenume") : "",
+                doc.getString("iban") != null ? doc.getString("iban") : "",
+                doc.getString("nota") != null ? doc.getString("nota") : "",
+                doc.getString("telefon") != null ? doc.getString("telefon") : ""
+        );
+        c.setId(doc.getId());
+        return c;
+    }
+
+    private java.util.Map<String, Object> contactToMap(Contact c) {
+        java.util.Map<String, Object> map = new java.util.HashMap<>();
+        map.put("nume", c.getNume());
+        map.put("prenume", c.getPrenume());
+        map.put("iban", c.getIban());
+        map.put("nota", c.getNota());
+        map.put("telefon", c.getTelefon());
+        return map;
+    }
+
+    public interface OnIncarcat {
+        void onIncarcat();
     }
 }

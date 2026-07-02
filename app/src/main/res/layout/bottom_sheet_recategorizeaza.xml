@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1A2E4A"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="12dp">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recategorizeaza tranzactia"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alege categoria corecta"
+        android:textColor="#7A9CC0"
+        android:textSize="11sp"
+        android:layout_marginBottom="16dp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:id="@+id/recatMancare"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🍔" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mancare" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recatShopping"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛍" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shopping" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recatTransport"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🚗" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Transport" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recatDivertisment"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎬" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Divertisment" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recatSanatate"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏥" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sanatate" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/recatUtilitati"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#12203A">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="💡" android:textSize="24sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Utilitati" android:textColor="#7A9CC0" android:textSize="10sp" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btnAnuleazaRecat"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Anuleaza"
+        android:textColor="#E53935"
+        android:backgroundTint="#12203A"/>
+
+</LinearLayout>

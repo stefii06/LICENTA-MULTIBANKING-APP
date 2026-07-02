@@ -23,6 +23,17 @@ import java.util.List;
 
 public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
 
+    private static final String ARG_IBAN = "iban";
+
+    // Metoda prin care pasam IBAN-ul contului apasat
+    public static DetaliiCardBottomSheet newInstance(String iban) {
+        DetaliiCardBottomSheet sheet = new DetaliiCardBottomSheet();
+        Bundle args = new Bundle();
+        args.putString(ARG_IBAN, iban);
+        sheet.setArguments(args);
+        return sheet;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,22 +44,33 @@ public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Luam primul cont din repository
+        // Luam IBAN-ul pasat ca argument
+        String iban = getArguments() != null ? getArguments().getString(ARG_IBAN) : null;
+
+        // Gasim contul dupa IBAN
+        ContBancar cont = null;
         List<ContBancar> conturi = ContBancarRepository.getInstance().getConturi();
-        if (conturi.isEmpty()) {
+        for (ContBancar c : conturi) {
+            if (c.getIban().equals(iban)) {
+                cont = c;
+                break;
+            }
+        }
+
+        // Daca nu gasim contul, inchidem
+        if (cont == null) {
             dismiss();
             return;
         }
 
-        ContBancar cont = conturi.get(0);
         String ultimeleCifre = cont.getIban().substring(cont.getIban().length() - 4);
 
         // Card preview
         View layoutCard = view.findViewById(R.id.layoutCardDetalii);
-        TextView tvBanca = view.findViewById(R.id.tvDetaliiCardBanca);
-        TextView tvNumar = view.findViewById(R.id.tvDetaliiCardNumar);
+        TextView tvBanca   = view.findViewById(R.id.tvDetaliiCardBanca);
+        TextView tvNumar   = view.findViewById(R.id.tvDetaliiCardNumar);
         TextView tvTitular = view.findViewById(R.id.tvDetaliiCardTitular);
-        TextView tvTip = view.findViewById(R.id.tvDetaliiCardTip);
+        TextView tvTip     = view.findViewById(R.id.tvDetaliiCardTip);
 
         try {
             layoutCard.setBackgroundColor(Color.parseColor(cont.getCuloareBanca()));
@@ -62,11 +84,11 @@ public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
         tvTip.setText(cont.getTipCard());
 
         // Campurile detalii
-        TextView tvCardName = view.findViewById(R.id.tvCardName);
-        TextView tvCardBank = view.findViewById(R.id.tvCardBank);
+        TextView tvCardName          = view.findViewById(R.id.tvCardName);
+        TextView tvCardBank          = view.findViewById(R.id.tvCardBank);
         TextView tvCardAccountNumber = view.findViewById(R.id.tvCardAccountNumber);
-        TextView tvCardExpiry = view.findViewById(R.id.tvCardExpiry);
-        TextView tvCardCvv = view.findViewById(R.id.tvCardCvv);
+        TextView tvCardExpiry        = view.findViewById(R.id.tvCardExpiry);
+        TextView tvCardCvv           = view.findViewById(R.id.tvCardCvv);
 
         tvCardName.setText(cont.getTitular());
         tvCardBank.setText(cont.getNumeBanca());
@@ -75,11 +97,11 @@ public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
         tvCardCvv.setText("419");
 
         // Butoane copiere
-        setupCopyButton(view, R.id.btnCopyCardName, cont.getTitular(), "Nume copiat!");
-        setupCopyButton(view, R.id.btnCopyBank, cont.getNumeBanca(), "Banca copiata!");
-        setupCopyButton(view, R.id.btnCopyAccountNumber, ultimeleCifre, "Numar copiat!");
-        setupCopyButton(view, R.id.btnCopyExpiry, "08/27", "Data expirarii copiata!");
-        setupCopyButton(view, R.id.btnCopyCvv, "419", "CVV copiat!");
+        setupCopyButton(view, R.id.btnCopyCardName,      cont.getTitular(),   "Nume copiat!");
+        setupCopyButton(view, R.id.btnCopyBank,           cont.getNumeBanca(), "Banca copiată!");
+        setupCopyButton(view, R.id.btnCopyAccountNumber,  ultimeleCifre,       "Număr copiat!");
+        setupCopyButton(view, R.id.btnCopyExpiry,         "08/27",             "Data expirării copiată!");
+        setupCopyButton(view, R.id.btnCopyCvv,            "419",               "CVV copiat!");
 
         view.findViewById(R.id.btnInchideDetalii).setOnClickListener(v -> dismiss());
     }

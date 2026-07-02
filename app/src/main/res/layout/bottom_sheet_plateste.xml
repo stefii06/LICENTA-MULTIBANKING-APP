@@ -3,120 +3,374 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#1A2E4A"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="24dp"
-    android:paddingTop="12dp">
+    android:background="#0a1628">
 
-    <!-- Handle -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
         android:background="#7A9CC0"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Titlu -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plateste"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alege cardul pentru plata"
-        android:textColor="#7A9CC0"
-        android:textSize="11sp"
-        android:layout_marginBottom="12dp"/>
-
-    <!-- Slider carduri -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCarduriPlateste"
+    <ViewFlipper
+        android:id="@+id/viewFlipperPlateste"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:clipToPadding="false"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="wrap_content">
 
-    <!-- Card selectat preview -->
-    <LinearLayout
-        android:id="@+id/layoutCardPreview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="14dp"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:id="@+id/tvCardPreviewBanca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BCR — Visa Debit"
-            android:textColor="#B0F0B0"
-            android:textSize="10sp"
-            android:layout_marginBottom="6dp"/>
-
-        <TextView
-            android:id="@+id/tvCardPreviewNumar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="•••• •••• •••• 3377"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
+        <!-- ===== PAS 1 — Alege cardul ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp">
 
             <TextView
-                android:id="@+id/tvCardPreviewTitular"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Ioana Stefania"
-                android:textColor="#B0F0B0"
-                android:textSize="11sp"/>
-
-            <TextView
-                android:id="@+id/tvCardPreviewTip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="VISA"
+                android:text="Portofel"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alege cardul pentru plata"
+                android:textColor="#7A9CC0"
+                android:textSize="11sp"
+                android:layout_marginBottom="12dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCarduriPlateste"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btnPlatesteCuCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plateste cu acest card"
+                android:backgroundTint="#4A90D9"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvAnuleazaPlateste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anuleaza"
+                android:textColor="#E53935"
+                android:gravity="center"
+                android:padding="12dp"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <!-- ===== PAS 2 — Card fullscreen NFC ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp">
 
-    <!-- Buton continua -->
-    <Button
-        android:id="@+id/btnContinuaPlateste"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Continua"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#4A90D9"
-        android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HCE · NFC simulat"
+                android:textColor="#90CAF9"
+                android:textSize="10sp"
+                android:background="#0D47A1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
 
-    <!-- Buton anuleaza -->
-    <Button
-        android:id="@+id/btnAnuleazaPlateste"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Anuleaza"
-        android:textColor="#E53935"
-        android:backgroundTint="#12203A"/>
+            <LinearLayout
+                android:id="@+id/layoutCardNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#E53935"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvNfcNumeBanca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BCR Visa Debit"
+                    android:textColor="#FFCDD2"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvNfcNrCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="•••• •••• •••• 1234"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvNfcTitular"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="I. STEFANIA"
+                        android:textColor="#FFCDD2"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VISA"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp">
+
+                <com.stefi.licentamultibankingapp.ui.dashboard.home.NfcRingsView
+                    android:id="@+id/nfcRingsView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apropiati de POS"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tineti telefonul aproape de cititorul POS"
+                android:textColor="#7A9CC0"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#12203A"
+                android:padding="10dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Simulare HCE. In realitate, telefonul emuleaza cardul fizic prin NFC catre POS, fara hardware suplimentar."
+                    android:textColor="#7A9CC0"
+                    android:textSize="10sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSimuleazaPlata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simuleaza plata"
+                android:backgroundTint="#1A3C6E"
+                android:textColor="#4A90D9"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvInapoiNfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inapoi"
+                android:textColor="#4A90D9"
+                android:gravity="center"
+                android:padding="12dp"/>
+
+        </LinearLayout>
+
+        <!-- ===== PAS 3 — Success ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plata simulata"
+                android:textColor="#4CAF50"
+                android:textSize="10sp"
+                android:background="#1e4a2a"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="#1e4a2a"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓"
+                    android:textColor="#4CAF50"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plata aprobata!"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tranzactie inregistrata in istoric"
+                android:textColor="#7A9CC0"
+                android:textSize="11sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#12203A"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Card"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:id="@+id/tvSuccessCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BCR •••• 1234"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Metoda"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NFC simulat"
+                        android:textColor="#90CAF9"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Salvat"
+                        android:textColor="#7A9CC0"
+                        android:textSize="11sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Firestore ✓"
+                        android:textColor="#4CAF50"
+                        android:textSize="11sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnInchidePlateste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mergi la Home"
+                android:backgroundTint="#4A90D9"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+    </ViewFlipper>
 
 </LinearLayout>

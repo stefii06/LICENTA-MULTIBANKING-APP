@@ -62,7 +62,7 @@ public class FormularContFragment extends BottomSheetDialogFragment {
             }
 
             ContBancar contNou = new ContBancar(numeBanca, iban, sold, "RON", culoare, titular, "Visa");
-            ContBancarRepository.getInstance().adaugaCont(contNou);
+            ContBancarRepository.getInstance().adaugaCont(contNou,null);
 
             Toast.makeText(getContext(), "Cont " + numeBanca + " adaugat cu succes!", Toast.LENGTH_SHORT).show();
             dismiss();

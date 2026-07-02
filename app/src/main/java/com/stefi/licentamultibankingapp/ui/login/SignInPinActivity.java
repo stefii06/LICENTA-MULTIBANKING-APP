@@ -7,8 +7,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.stefi.licentamultibankingapp.R;
+
+import java.util.concurrent.Executor;
 
 public class SignInPinActivity extends AppCompatActivity {
 
@@ -61,8 +66,15 @@ public class SignInPinActivity extends AppCompatActivity {
 
         tvUsePassword.setOnClickListener(v -> finish());
 
+        // FIX 1: biometrie reala in loc de Toast
         tvUseBiometric.setOnClickListener(v -> {
-            Toast.makeText(this, "Amprentă disponibilă după integrarea Firebase!", Toast.LENGTH_SHORT).show();
+            BiometricManager bm = BiometricManager.from(this);
+            if (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                    == BiometricManager.BIOMETRIC_SUCCESS) {
+                showBiometricPrompt();
+            } else {
+                Toast.makeText(this, "Biometria nu este disponibilă.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -73,10 +85,84 @@ public class SignInPinActivity extends AppCompatActivity {
         }
     }
 
+    // FIX 2: verifyPin simplu — direct Dashboard
     private void verifyPin() {
-        // Verificarea reala se face dupa Firebase
-        Toast.makeText(this, "PIN verificat! (Firebase necesar)", Toast.LENGTH_SHORT).show();
-        pinInput.setLength(0);
-        updateDots();
+        android.content.SharedPreferences prefs = getSharedPreferences("finmind_prefs", MODE_PRIVATE);
+
+        String lastUserId = prefs.getString("last_user_id", "");
+        String pinSalvat = prefs.getString("user_pin_" + lastUserId, "");
+
+        if (pinSalvat.isEmpty()) {
+            Toast.makeText(this, "Nu ai setat un PIN. Folosește parola.", Toast.LENGTH_SHORT).show();
+            pinInput.setLength(0);
+            updateDots();
+            return;
+        }
+
+        if (pinInput.toString().equals(pinSalvat)) {
+            // Incarcam datele din Firestore inainte sa deschidem Dashboard-ul
+            com.stefi.licentamultibankingapp.utils.FirestoreManager.reset();
+            com.stefi.licentamultibankingapp.model.ContBancarRepository.reset();
+            com.stefi.licentamultibankingapp.model.TranzactieRepository.reset();
+            com.stefi.licentamultibankingapp.model.AbonamentRepository.reset();
+            com.stefi.licentamultibankingapp.utils.FirestoreManager.getInstance();
+
+            com.stefi.licentamultibankingapp.utils.DemoDataGenerator.verificaSiInitializeaza("", "", () -> {
+                com.stefi.licentamultibankingapp.model.ContBancarRepository.getInstance().incarcaConturi(() -> {
+                    com.stefi.licentamultibankingapp.model.TranzactieRepository.getInstance().incarcaTranzactii(() -> {
+                        com.stefi.licentamultibankingapp.model.AbonamentRepository.getInstance().incarcaAbonamente(() -> {
+                            com.stefi.licentamultibankingapp.model.MockDataGenerator.incarcaVenituri(new com.stefi.licentamultibankingapp.model.MockDataGenerator.OnDateIncarcate() {
+                                @Override
+                                public void onIncarcate() {
+                                    android.content.Intent intent = new android.content.Intent(
+                                            SignInPinActivity.this,
+                                            com.stefi.licentamultibankingapp.ui.dashboard.DashboardActivity.class);
+                                    intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK |
+                                            android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+        } else {
+            Toast.makeText(this, "PIN incorect. Încearcă din nou.", Toast.LENGTH_SHORT).show();
+            pinInput.setLength(0);
+            updateDots();
+        }
+    }
+
+    // FIX 3: biometrie reala
+    private void showBiometricPrompt() {
+        Executor executor = ContextCompat.getMainExecutor(this);
+        BiometricPrompt prompt = new BiometricPrompt(this, executor,
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        android.content.Intent intent = new android.content.Intent(
+                                SignInPinActivity.this,
+                                com.stefi.licentamultibankingapp.ui.dashboard.DashboardActivity.class);
+                        intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK |
+                                android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                        Toast.makeText(SignInPinActivity.this,
+                                "Autentificare eșuată.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        BiometricPrompt.PromptInfo info = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Autentificare biometrică")
+                .setSubtitle("Folosește amprenta pentru a te conecta")
+                .setNegativeButtonText("Anulează")
+                .build();
+
+        prompt.authenticate(info);
     }
 }

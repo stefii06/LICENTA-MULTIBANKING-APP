@@ -31,13 +31,16 @@
         android:layout_height="wrap_content"
         android:hint="Nume"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="#1A3C6E">
+        app:boxStrokeColor="#1A3C6E"
+        app:hintTextColor="#1A3C6E"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName"
+            android:textColor="#1A3C6E"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,13 +51,16 @@
         android:layout_height="wrap_content"
         android:hint="Prenume"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="#1A3C6E">
+        app:boxStrokeColor="#1A3C6E"
+        app:hintTextColor="#1A3C6E"
+       >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName"
+            android:textColor="#1A3C6E"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,13 +71,18 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:layout_marginBottom="16dp"
-        app:boxStrokeColor="#1A3C6E">
+        app:boxStrokeColor="#1A3C6E"
+        app:hintTextColor="#1A3C6E"
+        app:helperText="ex: nume@gmail.com"
+        app:helperTextTextColor="#888888"
+       >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textColor="#1A3C6E"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,13 +105,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Număr de telefon"
-            app:boxStrokeColor="#1A3C6E">
+            app:boxStrokeColor="#1A3C6E"
+            app:hintTextColor="#1A3C6E"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"/>
+                android:inputType="phone"
+                android:textColor="#1A3C6E"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

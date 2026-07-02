@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#0D1829"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#2A4070"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schimbă PIN-ul"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PIN de 6 cifre pentru acces rapid"
+        android:textColor="#7A9CC0"
+        android:textSize="11sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Succes — ascuns initial -->
+    <LinearLayout
+        android:id="@+id/layoutSuccesPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#0D3020"
+        android:padding="20dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✅"
+            android:textSize="28sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN schimbat!"
+            android:textColor="#4CAF50"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Noul PIN este activ de acum."
+            android:textColor="#7A9CC0"
+            android:textSize="10sp"/>
+
+    </LinearLayout>
+
+    <!-- Formular PIN -->
+    <LinearLayout
+        android:id="@+id/layoutFormularPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- PIN curent -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN CURENT"
+            android:textColor="#7A9CC0"
+            android:textSize="9sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="4dp">
+
+            <EditText android:id="@+id/pinCurent1" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinCurent2" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinCurent3" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinCurent4" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinCurent5" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinCurent6" style="@style/PinFieldStyle"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvEroarePin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#E57373"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#1A3C6E"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- PIN nou -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN NOU"
+            android:textColor="#7A9CC0"
+            android:textSize="9sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="12dp">
+
+            <EditText android:id="@+id/pinNou1" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinNou2" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinNou3" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinNou4" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinNou5" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinNou6" style="@style/PinFieldStyle"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#1A3C6E"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Confirma PIN nou -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIRMĂ PIN NOU"
+            android:textColor="#7A9CC0"
+            android:textSize="9sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <EditText android:id="@+id/pinConfirm1" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinConfirm2" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinConfirm3" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinConfirm4" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinConfirm5" style="@style/PinFieldStyle"/>
+            <EditText android:id="@+id/pinConfirm6" style="@style/PinFieldStyle"/>
+
+        </LinearLayout>
+
+        <!-- Buton salvare -->
+        <LinearLayout
+            android:id="@+id/btnSalveazaPin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:background="#4A90D9">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvează"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
