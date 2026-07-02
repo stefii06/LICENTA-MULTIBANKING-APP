@@ -126,11 +126,11 @@ public class SignUpFragment5 extends Fragment {
                                     startActivity(intent);
                                 })
                                 .addOnFailureListener(e -> {
-                                    // Salvarea a esuat, dar contul e creat — mergem oricum
+                                    // Salvarea a esuat — informam userul, nu mai navigam mai departe
                                     progressBarSignUp.setVisibility(View.GONE);
-                                    Intent intent = new Intent(getActivity(), SignInActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                    btnGoToLogin.setEnabled(true);
+                                    tvEroareSignUp.setText("Contul a fost creat, dar datele nu s-au putut salva. Încearcă din nou.");
+                                    tvEroareSignUp.setVisibility(View.VISIBLE);
                                 });
                     })
                     .addOnFailureListener(e -> {
