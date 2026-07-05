@@ -57,6 +57,15 @@ public class ContactRepository {
                     contacte.add(contact);
                 });
     }
+    public void adaugaContact(Contact contact, Runnable callback) {
+        java.util.Map<String, Object> map = contactToMap(contact);
+        FirestoreManager.getInstance().contacte().add(map)
+                .addOnSuccessListener(ref -> {
+                    contact.setId(ref.getId());
+                    contacte.add(contact);
+                    if (callback != null) callback.run();
+                });
+    }
 
     public void stergeContact(String id) {
         FirestoreManager.getInstance().contacte().document(id).delete()

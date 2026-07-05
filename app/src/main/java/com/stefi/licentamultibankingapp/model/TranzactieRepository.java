@@ -79,6 +79,7 @@ public class TranzactieRepository {
                 suma
         );
         t.setId(doc.getId());
+        t.setContactId(doc.getString("contactId"));
         return t;
     }
 
@@ -91,6 +92,7 @@ public class TranzactieRepository {
         map.put("emoji", t.getEmoji());
         map.put("suma", t.getSuma());
         map.put("data", t.getData());
+        map.put("contactId", t.getContactId());
         return map;
     }
 
