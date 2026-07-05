@@ -65,9 +65,9 @@ public class AdaugaContBottomSheet extends BottomSheetDialogFragment {
 
         // Pasul 1 — click pe banca
         view.findViewById(R.id.optionBCR).setOnClickListener(v ->
-                treciLaPasul2("BCR", "#E53935"));
+                treciLaPasul2("BCR", "#1565C0"));
         view.findViewById(R.id.optionBRD).setOnClickListener(v ->
-                treciLaPasul2("BRD", "#1565C0"));
+                treciLaPasul2("BRD", "#E53935"));
         view.findViewById(R.id.optionING).setOnClickListener(v ->
                 treciLaPasul2("ING", "#FF6D00"));
         view.findViewById(R.id.optionRaiffeisen).setOnClickListener(v ->
