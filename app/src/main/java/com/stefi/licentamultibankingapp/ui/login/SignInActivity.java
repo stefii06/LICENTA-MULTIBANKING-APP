@@ -47,6 +47,15 @@ public class SignInActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnQuickAuth = findViewById(R.id.btnQuickAuth);
+        View layoutSeparatorSau = findViewById(R.id.layoutSeparatorSau);
+
+        if (mAuth.getCurrentUser() == null) {
+            btnQuickAuth.setVisibility(View.GONE);
+            layoutSeparatorSau.setVisibility(View.GONE);
+        } else {
+            btnQuickAuth.setVisibility(View.VISIBLE);
+            layoutSeparatorSau.setVisibility(View.VISIBLE);
+        }
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         progressBarSignIn = findViewById(R.id.progressBarSignIn);
         tvEroareSignIn = findViewById(R.id.tvEroareSignIn);
@@ -100,14 +109,17 @@ public class SignInActivity extends AppCompatActivity {
                                 .addOnSuccessListener(doc -> {
                                     SharedPreferences prefs = getSharedPreferences("user_data_" + userId, MODE_PRIVATE);
                                     if (doc.exists()) {
-                                        String fn = doc.getString("firstName") != null ? doc.getString("firstName") : "";
-                                        String ln = doc.getString("lastName") != null ? doc.getString("lastName") : "";
-                                        String ph = doc.getString("phone") != null ? doc.getString("phone") : "";
-                                        prefs.edit()
-                                                .putString("firstName", fn)
-                                                .putString("lastName", ln)
-                                                .putString("phone", ph)
-                                                .apply();
+                                        String fn = doc.getString("firstName");
+                                        String ln = doc.getString("lastName");
+                                        String ph = doc.getString("phone");
+
+                                        SharedPreferences.Editor editor = prefs.edit();
+                                        // Suprascriem doar daca Firestore chiar are valoarea —
+                                        // altfel pastram ce era deja salvat local, ca sa nu stergem numele bun
+                                        if (fn != null && !fn.isEmpty()) editor.putString("firstName", fn);
+                                        if (ln != null && !ln.isEmpty()) editor.putString("lastName", ln);
+                                        if (ph != null && !ph.isEmpty()) editor.putString("phone", ph);
+                                        editor.apply();
                                     }
 
                                     // Acum incarcam restul datelor

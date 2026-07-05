@@ -267,14 +267,29 @@ public class OnboardingFragment4 extends Fragment {
     }
 
     private void salveazaVenituri() {
-        Map<String, Object> venituri = new HashMap<>();
-        venituri.put("venit_0", 2800);
-        venituri.put("venit_1", 3000);
-        venituri.put("venit_2", 2900);
-        venituri.put("venit_3", 3100);
-        venituri.put("venit_4", 3050);
-        venituri.put("venit_5", 3200);
-        FirestoreManager.getInstance().userDoc().set(venituri);
+        // Citim numele din SharedPreferences local, la fel ca in genereazaTitular()
+        String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() != null
+                ? com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid()
+                : "";
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("user_data_" + userId, android.content.Context.MODE_PRIVATE);
+        String firstName = prefs.getString("firstName", "");
+        String lastName = prefs.getString("lastName", "");
+        String phone = prefs.getString("phone", "");
+
+        Map<String, Object> date = new HashMap<>();
+        date.put("firstName", firstName);
+        date.put("lastName", lastName);
+        date.put("phone", phone);
+        date.put("venit_0", 2800);
+        date.put("venit_1", 3000);
+        date.put("venit_2", 2900);
+        date.put("venit_3", 3100);
+        date.put("venit_4", 3050);
+        date.put("venit_5", 3200);
+
+        // Salvam numele si veniturile intr-un singur set(), ca sa nu se suprascrie unul pe altul
+        FirestoreManager.getInstance().userDoc().set(date);
     }
 
     private double genereazaSold(String banca) {
