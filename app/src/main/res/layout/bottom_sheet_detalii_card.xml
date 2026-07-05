@@ -31,11 +31,12 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Card preview -->
+        <!-- Card preview — mai mic si centrat, ca un card fizic -->
         <LinearLayout
             android:id="@+id/layoutCardDetalii"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_marginBottom="20dp">
@@ -55,9 +56,9 @@
                 android:layout_height="wrap_content"
                 android:text="2345 5678 4332 3377"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:letterSpacing="0.1"
+                android:letterSpacing="0.05"
                 android:layout_marginBottom="14dp"/>
 
             <LinearLayout
@@ -88,17 +89,17 @@
 
         </LinearLayout>
 
-        <!-- Lista detalii -->
+        <!-- Lista detalii — rotunjita -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#12203A"
+            android:background="@drawable/bg_detalii_lista_rounded"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
             android:layout_marginBottom="12dp">
 
-            <!-- Card Name -->
+            <!-- Nume -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,7 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Card Name"
+                    android:text="Nume"
                     android:textColor="#7A9CC0"
                     android:textSize="11sp"/>
 
@@ -141,7 +142,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#1A3C6E"/>
 
-            <!-- Bank -->
+            <!-- Banca -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bank"
+                    android:text="Bancă"
                     android:textColor="#7A9CC0"
                     android:textSize="11sp"/>
 
@@ -184,7 +185,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#1A3C6E"/>
 
-            <!-- Account Number -->
+            <!-- Numar cont -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,7 +198,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Account Number"
+                    android:text="Număr cont"
                     android:textColor="#7A9CC0"
                     android:textSize="11sp"/>
 
@@ -227,7 +228,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#1A3C6E"/>
 
-            <!-- Expiry -->
+            <!-- Data expirarii -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,7 +241,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Expiry Date"
+                    android:text="Data expirării"
                     android:textColor="#7A9CC0"
                     android:textSize="11sp"/>
 
@@ -313,13 +314,13 @@
 
         </LinearLayout>
 
-        <!-- Buton inchide -->
+        <!-- Buton inchide — rotunjit -->
         <LinearLayout
             android:id="@+id/btnInchideDetalii"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="#12203A"
+            android:background="@drawable/bg_detalii_inchide_rounded"
             android:padding="14dp">
 
             <TextView

@@ -72,11 +72,15 @@ public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
         TextView tvTitular = view.findViewById(R.id.tvDetaliiCardTitular);
         TextView tvTip     = view.findViewById(R.id.tvDetaliiCardTip);
 
+        // Fundal rotunjit colorat cu culoarea bancii — aceeasi tehnica ca la wallet (Home)
+        android.graphics.drawable.GradientDrawable fundal = new android.graphics.drawable.GradientDrawable();
+        fundal.setCornerRadius(dp(16));
         try {
-            layoutCard.setBackgroundColor(Color.parseColor(cont.getCuloareBanca()));
+            fundal.setColor(Color.parseColor(cont.getCuloareBanca()));
         } catch (Exception e) {
-            layoutCard.setBackgroundColor(Color.parseColor("#1A3C6E"));
+            fundal.setColor(Color.parseColor("#1A3C6E"));
         }
+        layoutCard.setBackground(fundal);
 
         tvBanca.setText(cont.getNumeBanca() + " — " + cont.getTipCard());
         tvNumar.setText("2345 5678 4332 " + ultimeleCifre);
@@ -114,5 +118,11 @@ public class DetaliiCardBottomSheet extends BottomSheetDialogFragment {
             clipboard.setPrimaryClip(clip);
             Toast.makeText(getContext(), mesaj, Toast.LENGTH_SHORT).show();
         });
+    }
+
+    // Helper conversie dp — la fel ca in HomeFragment
+    private int dp(int val) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(val * density);
     }
 }
