@@ -482,6 +482,13 @@ public class HomeFragment extends Fragment {
                     bottomSheet.setListener(() -> contacteAdapter.actualizeazaLista(
                             ContactRepository.getInstance().getContacte()));
                     bottomSheet.show(getParentFragmentManager(), "AdaugaContact");
+                },
+                contact -> {
+                    ContactDetailsBottomSheet bottomSheet = new ContactDetailsBottomSheet();
+                    bottomSheet.setContact(contact);
+                    bottomSheet.setListener(() -> contacteAdapter.actualizeazaLista(
+                            ContactRepository.getInstance().getContacte()));
+                    bottomSheet.show(getParentFragmentManager(), "ContactDetails");
                 }
         );
         rvContacte.setAdapter(contacteAdapter);

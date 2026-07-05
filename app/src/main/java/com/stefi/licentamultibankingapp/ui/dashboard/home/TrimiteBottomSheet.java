@@ -42,8 +42,20 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
     private String identificatorDestinatar = "";
     private final ContacteAdapter[] adapter2Ref = new ContacteAdapter[1];
 
+    // Contactul ales din lista (Pas 2) sau adaugat pe loc — folosit ca sa legam
+    // tranzactia de el prin contactId. Ramane null daca se trimite pe IBAN manual.
+    private Contact contactSelectat;
+
+    // Contact primit din afara (ex: din ecranul de Contact Details) — daca exista,
+    // Pasul 2 (alegere destinatar) este sarit complet.
+    private Contact contactPreselectat;
+
     public void setCallback(OnTransferFacut callback) {
         this.callback = callback;
+    }
+
+    public void setContactPreselectat(Contact contact) {
+        this.contactPreselectat = contact;
     }
 
     @Nullable
@@ -96,7 +108,18 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
                 Toast.makeText(getContext(), "Alege un cont!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            viewFlipper.showNext();
+
+            // Daca avem deja un contact preselectat (ex: din Contact Details),
+            // sarim direct la Pas 3 fara sa mai trecem prin alegerea destinatarului
+            if (contactPreselectat != null) {
+                destinatar = contactPreselectat.getNumeComplet();
+                identificatorDestinatar = contactPreselectat.getTelefon().isEmpty()
+                        ? contactPreselectat.getIban() : contactPreselectat.getTelefon();
+                contactSelectat = contactPreselectat;
+                treciLaPas3(view);
+            } else {
+                viewFlipper.showNext();
+            }
         });
 
         view.findViewById(R.id.tvAnuleazaPas1).setOnClickListener(v -> dismiss());
@@ -118,6 +141,7 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
                     destinatar = contact.getNumeComplet();
                     identificatorDestinatar = contact.getTelefon().isEmpty()
                             ? contact.getIban() : contact.getTelefon();
+                    contactSelectat = contact;
                     treciLaPas3(view);
                 }
         );
@@ -135,6 +159,7 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
                     destinatar = ultim.getNumeComplet();
                     identificatorDestinatar = ultim.getTelefon().isEmpty()
                             ? ultim.getIban() : ultim.getTelefon();
+                    contactSelectat = ultim;
                     // Refresh lista si continua la pas 3
                     adapter2Ref[0].actualizeazaLista(contacteNoi);
                     treciLaPas3(view);
@@ -161,6 +186,8 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
                 }
                 destinatar = "Transfer bancar";
                 identificatorDestinatar = iban;
+                // Pe IBAN manual nu exista un contact salvat de care sa ne legam
+                contactSelectat = null;
                 treciLaPas3(view);
             });
             builder.setNegativeButton("Anuleaza", null);
@@ -177,7 +204,9 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
         TextView tvSub = view.findViewById(R.id.tvSubtitluDestinatarPas3);
         tvTitlu.setText("Trimite catre " + destinatar);
         tvSub.setText(identificatorDestinatar);
-        viewFlipper.showNext();
+        // setDisplayedChild(2) in loc de showNext() — mergem direct la Pas 3,
+        // indiferent daca venim din Pas 1 (contact preselectat) sau din Pas 2 (flux normal)
+        viewFlipper.setDisplayedChild(2);
     }
 
     private void setupPas3(View view) {
@@ -221,8 +250,15 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
             viewFlipper.showNext();
         });
 
-        view.findViewById(R.id.tvInapoiPas3).setOnClickListener(v ->
-                viewFlipper.showPrevious());
+        view.findViewById(R.id.tvInapoiPas3).setOnClickListener(v -> {
+            // Daca am sarit peste Pas 2 (contact preselectat), ne intoarcem la Pas 1,
+            // nu la Pas 2 care nici nu a fost afisat
+            if (contactPreselectat != null) {
+                viewFlipper.setDisplayedChild(0);
+            } else {
+                viewFlipper.showPrevious();
+            }
+        });
     }
 
     // PAS 4 — confirmare + Firestore + sold actualizat
@@ -244,11 +280,17 @@ public class TrimiteBottomSheet extends BottomSheetDialogFragment {
                 Tranzactie t = new Tranzactie(
                         contSelectat.getNumeBanca(),
                         contSelectat.getIban().substring(contSelectat.getIban().length() - 4),
+                        "Trimis catre " + destinatar,
                         "Transfer",
                         "💸",
                         new java.util.Date(),
                         -suma
                 );
+                // Legam tranzactia de contactul ales, ca sa apara si in Istoricul lui
+                // (ramane fara legatura daca s-a trimis pe IBAN introdus manual)
+                if (contactSelectat != null) {
+                    t.setContactId(contactSelectat.getId());
+                }
                 TranzactieRepository.getInstance().adaugaTranzactie(t);
 
                 double soldNou = contSelectat.getSold() - suma;

@@ -1,6 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#0a1628"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:background="#7A9CC0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Avatar + nume -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvAvatarContactDetalii"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:text="MI"
+            android:textColor="#B0C8F0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_avatar_circle_contact"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/tvNumeContactDetalii"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nume contact"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact salvat"
+            android:textColor="#7A9CC0"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp"/>
+
+    </LinearLayout>
+
+    <!-- IBAN + telefon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_contact_info_rounded"
+        android:padding="14dp"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IBAN"
+                android:textColor="#7A9CC0"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tvIbanContactDetalii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rowTelefonContactDetalii"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Telefon"
+                android:textColor="#7A9CC0"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tvTelefonContactDetalii"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="—"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Shortcut Trimite bani -->
+    <LinearLayout
+        android:id="@+id/btnTrimiteDinContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/bg_trimite_contact_rounded"
+        android:padding="12dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trimite bani"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Istoric tranzactii"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tvGolIstoricContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nicio tranzactie inca"
+        android:textColor="#7A9CC0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIstoricContact"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvStergeContactDetalii"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sterge contact"
+        android:textColor="#E53935"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:padding="10dp"/>
+
+</LinearLayout>

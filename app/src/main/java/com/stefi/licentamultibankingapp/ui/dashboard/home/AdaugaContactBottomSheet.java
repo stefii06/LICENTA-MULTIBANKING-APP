@@ -19,6 +19,14 @@ import com.stefi.licentamultibankingapp.R;
 import com.stefi.licentamultibankingapp.model.Contact;
 import com.stefi.licentamultibankingapp.model.ContactRepository;
 
+import com.stefi.licentamultibankingapp.model.ContBancar;
+import com.stefi.licentamultibankingapp.model.ContBancarRepository;
+import com.stefi.licentamultibankingapp.model.Tranzactie;
+import com.stefi.licentamultibankingapp.model.TranzactieRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 public class AdaugaContactBottomSheet extends BottomSheetDialogFragment {
 
     private OnContactAdaugat listener;
@@ -75,14 +83,46 @@ public class AdaugaContactBottomSheet extends BottomSheetDialogFragment {
                         Toast.LENGTH_SHORT).show();
                 return;
             }
-
             Contact contact = new Contact(nume, prenume, iban, nota, telefon);
-            ContactRepository.getInstance(getContext()).adaugaContact(contact);
-            Toast.makeText(getContext(), "Contact adaugat!", Toast.LENGTH_SHORT).show();
-            if (listener != null) listener.onContactAdaugat();
-            dismiss();
+            ContactRepository.getInstance(getContext()).adaugaContact(contact, () -> {
+                genereazaTranzactiiSimulate(contact);
+                Toast.makeText(getContext(), "Contact adaugat!", Toast.LENGTH_SHORT).show();
+                if (listener != null) listener.onContactAdaugat();
+                dismiss();
+            });
         });
 
         btnAnuleaza.setOnClickListener(v -> dismiss());
+
+
+    }
+    // Genereaza 6 tranzactii simulate (mix intrari/iesiri) pentru un contact nou,
+// ca sa poata fi testat ecranul de Istoric tranzactii cu acel contact
+    private void genereazaTranzactiiSimulate(Contact contact) {
+        List<ContBancar> conturiCurente = ContBancarRepository.getInstance().getConturiCurente();
+        if (conturiCurente.isEmpty()) return;
+
+        Random random = new Random();
+        String numeContact = contact.getNumeComplet().trim();
+
+        for (int i = 0; i < 6; i++) {
+            ContBancar cont = conturiCurente.get(random.nextInt(conturiCurente.size()));
+            boolean trimis = random.nextBoolean();
+
+            float suma = 20 + random.nextInt(480);
+            if (trimis) suma = -suma;
+
+            int zileInUrma = random.nextInt(60);
+            Date data = new Date(System.currentTimeMillis() - zileInUrma * 24L * 60 * 60 * 1000);
+
+            String descriere = trimis ? "Trimis catre " + numeContact : "Primit de la " + numeContact;
+            String ultimeleCifre = cont.getIban().substring(cont.getIban().length() - 4);
+
+            Tranzactie t = new Tranzactie(cont.getNumeBanca(), ultimeleCifre, descriere,
+                    "Altele", "💸", data, suma);
+            t.setContactId(contact.getId());
+
+            TranzactieRepository.getInstance().adaugaTranzactie(t);
+        }
     }
 }
