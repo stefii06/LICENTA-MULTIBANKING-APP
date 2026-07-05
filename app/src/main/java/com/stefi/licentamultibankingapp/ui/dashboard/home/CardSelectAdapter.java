@@ -45,14 +45,17 @@ public class CardSelectAdapter extends RecyclerView.Adapter<CardSelectAdapter.Ca
         holder.tvNumar.setText("•••• " + cont.getIban().substring(cont.getIban().length() - 4));
         holder.tvSold.setText(String.format("%.2f %s", cont.getSold(), cont.getValuta()));
 
-        // Culoarea bancii
+        // Fundal rotunjit colorat cu culoarea bancii — aceeasi tehnica ca la cardurile din wallet (Home)
+        android.graphics.drawable.GradientDrawable fundal = new android.graphics.drawable.GradientDrawable();
+        fundal.setCornerRadius(dp(16, holder.itemView));
         try {
-            holder.itemView.setBackgroundColor(Color.parseColor(cont.getCuloareBanca()));
+            fundal.setColor(Color.parseColor(cont.getCuloareBanca()));
         } catch (Exception e) {
-            holder.itemView.setBackgroundColor(Color.parseColor("#1A3C6E"));
+            fundal.setColor(Color.parseColor("#1A3C6E"));
         }
+        holder.itemView.setBackground(fundal);
 
-        // Card selectat — border alb
+        // Card selectat — evidentiat cu alpha, la fel ca inainte
         if (position == selectedPosition) {
             holder.itemView.setAlpha(1.0f);
         } else {
@@ -78,6 +81,13 @@ public class CardSelectAdapter extends RecyclerView.Adapter<CardSelectAdapter.Ca
     public ContBancar getSelectedCont() {
         if (conturi.isEmpty()) return null;
         return conturi.get(selectedPosition);
+    }
+
+    // Helper local pentru conversia dp — adapterul nu are acces la Fragment, deci nu poate
+    // reutiliza metoda dp() din HomeFragment
+    private int dp(int val, View view) {
+        float density = view.getResources().getDisplayMetrics().density;
+        return Math.round(val * density);
     }
 
     static class CardViewHolder extends RecyclerView.ViewHolder {
