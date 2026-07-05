@@ -1,6 +1,7 @@
 package com.stefi.licentamultibankingapp.ui.dashboard.home;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -101,16 +102,23 @@ public class PlatesteBottomSheet extends BottomSheetDialogFragment {
                     cont.getIban().substring(cont.getIban().length() - 4));
             tvTitular.setText(cont.getTitular().toUpperCase());
 
+            GradientDrawable fundalCard = new GradientDrawable();
+            fundalCard.setCornerRadius(dpToPx(16));
             try {
-                layoutCard.setBackgroundColor(Color.parseColor(cont.getCuloareBanca()));
+                fundalCard.setColor(Color.parseColor(cont.getCuloareBanca()));
             } catch (Exception e) {
-                layoutCard.setBackgroundColor(Color.parseColor("#1A3C6E"));
+                fundalCard.setColor(Color.parseColor("#1A3C6E"));
             }
+            layoutCard.setBackground(fundalCard);
 
             viewFlipper.showNext();
         });
 
         view.findViewById(R.id.tvAnuleazaPlateste).setOnClickListener(v -> dismiss());
+    }
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return (int) (dp * density);
     }
 
     // PAS 2 — NFC simulat
