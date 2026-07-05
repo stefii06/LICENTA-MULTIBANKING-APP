@@ -854,8 +854,17 @@ public class TransactionsFragment extends Fragment {
         } else if (t.getCategorie().equals("Altele")) {
             tvBadge.setVisibility(View.VISIBLE);
             tvBadge.setText("Recategorizeaza");
-            tvActiune.setVisibility(View.VISIBLE);
-            tvActiune.setText("+ Seteaza abonament");
+
+            // "+ Seteaza abonament" nu are sens pe un transfer catre/de la un contact —
+            // il aratam doar daca tranzactia NU e legata de un contact (contactId gol/null)
+            boolean esteTransferContact = t.getContactId() != null && !t.getContactId().isEmpty();
+            if (esteTransferContact) {
+                tvActiune.setVisibility(View.GONE);
+            } else {
+                tvActiune.setVisibility(View.VISIBLE);
+                tvActiune.setText("+ Seteaza abonament");
+            }
+
             item.setOnClickListener(v -> {
                 RecategorizeazaBottomSheet sheet = new RecategorizeazaBottomSheet();
                 sheet.setTranzactie(t);
@@ -866,6 +875,7 @@ public class TransactionsFragment extends Fragment {
                 });
                 sheet.show(getParentFragmentManager(), "Recategorizeaza");
             });
+
         } else {
             tvBadge.setVisibility(View.GONE);
             tvActiune.setVisibility(View.VISIBLE);
