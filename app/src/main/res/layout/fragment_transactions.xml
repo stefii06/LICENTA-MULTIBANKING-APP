@@ -28,7 +28,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_statistics"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_card_rounded"
             android:padding="8dp"/>
 
     </LinearLayout>
@@ -39,11 +39,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#1A2E4A"
+        android:background="@drawable/bg_card_rounded"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="12dp"
-        android:padding="8dp">
+        android:layout_marginTop="16dp"
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/btnLunaAnterioara"
@@ -98,11 +98,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#1A2E4A"
+        android:background="@drawable/bg_card_rounded"
         android:padding="4dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="0dp">
 
         <TextView
@@ -163,9 +163,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#1A2E4A"
-                    android:padding="12dp"
-                    android:layout_marginBottom="12dp">
+                    android:background="@drawable/bg_card_rounded"
+                    android:padding="16dp"
+                    android:layout_marginBottom="18dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -221,10 +221,11 @@
                 </LinearLayout>
 
                 <!-- Filtre categorii scrollabile orizontal -->
-                <androidx.core.widget.NestedScrollView
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp">
+                    android:layout_marginBottom="6dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:id="@+id/layoutFiltre"
@@ -232,33 +233,33 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"/>
 
-                </androidx.core.widget.NestedScrollView>
+                </HorizontalScrollView>
 
-                <!-- Insight -->
+                <!-- Insight — linie discreta, fara fundal propriu -->
                 <LinearLayout
                     android:id="@+id/layoutInsight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:background="#1A3C6E"
-                    android:padding="12dp"
-                    android:layout_marginBottom="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="16dp"
                     android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="💡"
-                        android:textSize="18sp"
-                        android:layout_marginEnd="8dp"/>
+                        android:textSize="13sp"
+                        android:alpha="0.7"
+                        android:layout_marginEnd="6dp"/>
 
                     <TextView
                         android:id="@+id/tvInsight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="#FFFFFF"
+                        android:textColor="#7A9CC0"
                         android:textSize="11sp"/>
 
                 </LinearLayout>
@@ -270,9 +271,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:background="#1A2E4A"
-                    android:padding="12dp"
-                    android:layout_marginBottom="8dp">
+                    android:background="@drawable/bg_card_rounded"
+                    android:padding="16dp"
+                    android:layout_marginBottom="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -322,58 +323,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#1A2E4A"
-                    android:padding="10dp"
-                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_card_rounded"
+                    android:padding="14dp"
+                    android:layout_marginBottom="14dp"
                     android:visibility="gone">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tvLunaCalendar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:id="@+id/btnLunaAnterioaraCalendar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="‹"
-                            android:textColor="#4A90D9"
-                            android:textSize="18sp"
-                            android:padding="4dp"/>
-
-                        <TextView
-                            android:id="@+id/tvLunaCalendar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Mai 2026"
-                            android:textColor="#FFFFFF"
-                            android:textSize="13sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/btnLunaUrmatoareCalendar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="›"
-                            android:textColor="#4A90D9"
-                            android:textSize="18sp"
-                            android:padding="4dp"/>
-
-                        <TextView
-                            android:id="@+id/tvInchideCalendar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="✕"
-                            android:textColor="#E05252"
-                            android:textSize="13sp"
-                            android:padding="4dp"
-                            android:layout_marginStart="8dp"/>
-
-                    </LinearLayout>
+                        android:gravity="center"
+                        android:text="Mai 2026"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"/>
 
                     <GridLayout
                         android:layout_width="match_parent"
@@ -399,38 +363,6 @@
 
                 </LinearLayout>
 
-                <!-- Bara filtru zi activ -->
-                <LinearLayout
-                    android:id="@+id/layoutFiltruActiv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#1A3C6E"
-                    android:padding="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/tvFiltruActivText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text=""
-                        android:textColor="#7EB8F7"
-                        android:textSize="11sp"/>
-
-                    <TextView
-                        android:id="@+id/tvStergeFiltr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="✕ Sterge filtru"
-                        android:textColor="#E05252"
-                        android:textSize="11sp"
-                        android:padding="4dp"/>
-
-                </LinearLayout>
-
                 <!-- Lista tranzactii grupata pe zile -->
                 <LinearLayout
                     android:id="@+id/layoutListaTranzactii"
@@ -453,9 +385,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#1A2E4A"
-                    android:padding="12dp"
-                    android:layout_marginBottom="12dp">
+                    android:background="@drawable/bg_card_rounded"
+                    android:padding="16dp"
+                    android:layout_marginBottom="18dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -515,7 +447,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="14dp">
 
                     <TextView
                         android:id="@+id/btnSortIntrariRecente"
@@ -576,9 +508,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#1A2E4A"
-                    android:padding="12dp"
-                    android:layout_marginBottom="12dp">
+                    android:background="@drawable/bg_card_rounded"
+                    android:padding="16dp"
+                    android:layout_marginBottom="18dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -638,7 +570,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="14dp">
 
                     <TextView
                         android:id="@+id/btnSortIesiriRecente"

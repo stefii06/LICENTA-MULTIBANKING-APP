@@ -526,8 +526,6 @@ public class CardsFragment extends Fragment {
         view.findViewById(R.id.btnAdaugaContDepozit).setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), CreareDepozitActivity.class)));
 
-        view.findViewById(R.id.btnConecteazaContNou).setOnClickListener(v ->
-                Toast.makeText(getContext(), "Conectare cont nou — coming soon!", Toast.LENGTH_SHORT).show());
     }
 
     // ===== HELPER-E =====

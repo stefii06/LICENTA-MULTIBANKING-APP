@@ -41,15 +41,11 @@ public class TransactionsFragment extends Fragment {
     private int anSelectat;
 
     // Calendar (tab Toate)
-    private LinearLayout layoutCautaBtn, layoutCalendar, layoutFiltruActiv;
+    private LinearLayout layoutCautaBtn, layoutCalendar;
     private TextView tvCautaLabel, tvCautaSub, tvCautaArrow;
-    private TextView tvInchideCalendar, tvFiltruActivText, tvStergeFiltr;
-    private GridLayout gridZileCalendar;
-    private TextView tvLunaCalendar, btnLunaAntCalendar, btnLunaUrmCalendar;
 
-    // Luna afisata in calendar (poate diferi de luna selectata)
-    private int calendarLuna;
-    private int calendarAn;
+    private GridLayout gridZileCalendar;
+    private TextView tvLunaCalendar;
 
     // Filtru zi activ (tab Toate)
     private boolean filtruZiActiv = false;
@@ -81,8 +77,6 @@ public class TransactionsFragment extends Fragment {
         Calendar azi = Calendar.getInstance();
         lunaSelectata = azi.get(Calendar.MONTH);
         anSelectat = azi.get(Calendar.YEAR);
-        calendarLuna = lunaSelectata;
-        calendarAn = anSelectat;
 
         // Tabs
         layoutTabToate = view.findViewById(R.id.layoutTabToate);
@@ -101,17 +95,11 @@ public class TransactionsFragment extends Fragment {
         // Calendar
         layoutCautaBtn = view.findViewById(R.id.layoutCautaBtn);
         layoutCalendar = view.findViewById(R.id.layoutCalendar);
-        layoutFiltruActiv = view.findViewById(R.id.layoutFiltruActiv);
         tvCautaLabel = view.findViewById(R.id.tvCautaLabel);
         tvCautaSub = view.findViewById(R.id.tvCautaSub);
         tvCautaArrow = view.findViewById(R.id.tvCautaArrow);
-        tvInchideCalendar = view.findViewById(R.id.tvInchideCalendar);
-        tvFiltruActivText = view.findViewById(R.id.tvFiltruActivText);
-        tvStergeFiltr = view.findViewById(R.id.tvStergeFiltr);
         gridZileCalendar = view.findViewById(R.id.gridZileCalendar);
         tvLunaCalendar = view.findViewById(R.id.tvLunaCalendar);
-        btnLunaAntCalendar = view.findViewById(R.id.btnLunaAnterioaraCalendar);
-        btnLunaUrmCalendar = view.findViewById(R.id.btnLunaUrmatoareCalendar);
 
         setupHeaderLuna(view);
         setupTabs(view);
@@ -135,19 +123,23 @@ public class TransactionsFragment extends Fragment {
         btnLunaAnterioara.setOnClickListener(v -> {
             lunaSelectata--;
             if (lunaSelectata < 0) { lunaSelectata = 11; anSelectat--; }
-            // Resetam filtrul de zi cand schimbam luna
             stergeFiltrZi(view);
+            if (layoutCalendar.getVisibility() == View.VISIBLE) {
+                construiesteCalendar();
+            }
             actualizeazaHeaderLuna();
             actualizeazaToate(view);
         });
 
         btnLunaUrmatoare.setOnClickListener(v -> {
             Calendar azi = Calendar.getInstance();
-            // Nu permitem navigarea in viitor
             if (lunaSelectata == azi.get(Calendar.MONTH) && anSelectat == azi.get(Calendar.YEAR)) return;
             lunaSelectata++;
             if (lunaSelectata > 11) { lunaSelectata = 0; anSelectat++; }
             stergeFiltrZi(view);
+            if (layoutCalendar.getVisibility() == View.VISIBLE) {
+                construiesteCalendar();
+            }
             actualizeazaHeaderLuna();
             actualizeazaToate(view);
         });
@@ -189,9 +181,9 @@ public class TransactionsFragment extends Fragment {
         layoutTabIntrari.setVisibility(index == 1 ? View.VISIBLE : View.GONE);
         layoutTabIesiri.setVisibility(index == 2 ? View.VISIBLE : View.GONE);
 
-        tabToate.setBackgroundColor(index == 0 ? 0xFF4A90D9 : 0x00000000);
-        tabIntrari.setBackgroundColor(index == 1 ? 0xFF4A90D9 : 0x00000000);
-        tabIesiri.setBackgroundColor(index == 2 ? 0xFF4A90D9 : 0x00000000);
+        tabToate.setBackground(index == 0 ? creazaFundalChip(0xFF4A90D9) : null);
+        tabIntrari.setBackground(index == 1 ? creazaFundalChip(0xFF4A90D9) : null);
+        tabIesiri.setBackground(index == 2 ? creazaFundalChip(0xFF4A90D9) : null);
 
         tabToate.setTextColor(index == 0 ? 0xFFFFFFFF : 0xFF7A9CC0);
         tabIntrari.setTextColor(index == 1 ? 0xFFFFFFFF : 0xFF7A9CC0);
@@ -199,38 +191,21 @@ public class TransactionsFragment extends Fragment {
     }
 
     // ---------------------------------------------------------------
-    // CALENDAR (tab Toate)
+    // CALENDAR (tab Toate) — butonul de sus doar deschide/inchide
+    // calendarul; selectarea/deselectarea zilei se face din calendar
     // ---------------------------------------------------------------
 
     private void setupCalendar(View view) {
-        // Tap pe butonul Cauta dupa zi
+        // Singurul control care deschide/inchide calendarul
         layoutCautaBtn.setOnClickListener(v -> {
-            if (filtruZiActiv) {
-                stergeFiltrZi(view);
+            if (layoutCalendar.getVisibility() == View.VISIBLE) {
+                layoutCalendar.setVisibility(View.GONE);
+                tvCautaArrow.setText("▼");
             } else {
-                // Sincronizam calendarul cu luna selectata
-                calendarLuna = lunaSelectata;
-                calendarAn = anSelectat;
                 layoutCalendar.setVisibility(View.VISIBLE);
+                tvCautaArrow.setText("▲");
                 construiesteCalendar();
             }
-        });
-
-        tvInchideCalendar.setOnClickListener(v ->
-                layoutCalendar.setVisibility(View.GONE));
-
-        tvStergeFiltr.setOnClickListener(v -> stergeFiltrZi(view));
-
-        btnLunaAntCalendar.setOnClickListener(v -> {
-            calendarLuna--;
-            if (calendarLuna < 0) { calendarLuna = 11; calendarAn--; }
-            construiesteCalendar();
-        });
-
-        btnLunaUrmCalendar.setOnClickListener(v -> {
-            calendarLuna++;
-            if (calendarLuna > 11) { calendarLuna = 0; calendarAn++; }
-            construiesteCalendar();
         });
     }
 
@@ -242,11 +217,6 @@ public class TransactionsFragment extends Fragment {
 
         tvCautaLabel.setText("Cauta dupa zi");
         tvCautaSub.setText("selecteaza o zi din calendar");
-        tvCautaArrow.setText("▼");
-        tvCautaArrow.setTextColor(0xFF4A90D9);
-
-        layoutFiltruActiv.setVisibility(View.GONE);
-        layoutCalendar.setVisibility(View.GONE);
 
         setupTabToate(view);
     }
@@ -254,7 +224,7 @@ public class TransactionsFragment extends Fragment {
     private void construiesteCalendar() {
         if (getContext() == null) return;
 
-        tvLunaCalendar.setText(NUME_LUNI_LUNG[calendarLuna] + " " + calendarAn);
+        tvLunaCalendar.setText(NUME_LUNI_LUNG[lunaSelectata] + " " + anSelectat);
         gridZileCalendar.removeAllViews();
 
         List<Tranzactie> toate = TranzactieRepository.getInstance().getTranzactii();
@@ -265,7 +235,7 @@ public class TransactionsFragment extends Fragment {
             if (t.getData() == null) continue;
             Calendar cal = Calendar.getInstance();
             cal.setTime(t.getData());
-            if (cal.get(Calendar.MONTH) == calendarLuna && cal.get(Calendar.YEAR) == calendarAn) {
+            if (cal.get(Calendar.MONTH) == lunaSelectata && cal.get(Calendar.YEAR) == anSelectat) {
                 int zi = cal.get(Calendar.DAY_OF_MONTH);
                 boolean eIntrare = t.getSuma() >= 0;
                 if (!tipZi.containsKey(zi)) {
@@ -278,7 +248,7 @@ public class TransactionsFragment extends Fragment {
         }
 
         Calendar primaZi = Calendar.getInstance();
-        primaZi.set(calendarAn, calendarLuna, 1);
+        primaZi.set(anSelectat, lunaSelectata, 1);
         int ziuaSapt = primaZi.get(Calendar.DAY_OF_WEEK);
         int offset = (ziuaSapt == Calendar.SUNDAY) ? 6 : ziuaSapt - 2;
         int nrZile = primaZi.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -301,10 +271,10 @@ public class TransactionsFragment extends Fragment {
             tv.setLayoutParams(celulaCalendarParams());
 
             boolean eAzi = (zi == azi.get(Calendar.DAY_OF_MONTH)
-                    && calendarLuna == azi.get(Calendar.MONTH)
-                    && calendarAn == azi.get(Calendar.YEAR));
+                    && lunaSelectata == azi.get(Calendar.MONTH)
+                    && anSelectat == azi.get(Calendar.YEAR));
             boolean eSel = (filtruZiActiv && zi == filtruZi
-                    && calendarLuna == filtruZiLuna && calendarAn == filtruZiAn);
+                    && lunaSelectata == filtruZiLuna && anSelectat == filtruZiAn);
 
             if (eSel) {
                 tv.setBackgroundColor(0xFF4A90D9);
@@ -321,7 +291,16 @@ public class TransactionsFragment extends Fragment {
             }
 
             if (tipZi.containsKey(zi)) {
-                tv.setOnClickListener(v -> selecteazaZi(ziF, calendarLuna, calendarAn));
+                tv.setOnClickListener(v -> {
+                    boolean esteDejaSelectata = filtruZiActiv && ziF == filtruZi
+                            && lunaSelectata == filtruZiLuna && anSelectat == filtruZiAn;
+                    if (esteDejaSelectata) {
+                        if (getView() != null) stergeFiltrZi(getView());
+                        construiesteCalendar();
+                    } else {
+                        selecteazaZi(ziF, lunaSelectata, anSelectat);
+                    }
+                });
             }
 
             gridZileCalendar.addView(tv);
@@ -345,13 +324,8 @@ public class TransactionsFragment extends Fragment {
 
         construiesteCalendar();
 
-        layoutFiltruActiv.setVisibility(View.VISIBLE);
-        tvFiltruActivText.setText("📅 " + zi + " " + NUME_LUNI_LUNG[luna] + " " + an);
-
         tvCautaLabel.setText(zi + " " + NUME_LUNI_LUNG[luna]);
-        tvCautaSub.setText("Apasa X pentru a sterge");
-        tvCautaArrow.setText("✕");
-        tvCautaArrow.setTextColor(0xFFE05252);
+        tvCautaSub.setText("Atinge din nou ziua ca sa anulezi");
 
         if (getView() != null) setupTabToate(getView());
     }
@@ -535,13 +509,13 @@ public class TransactionsFragment extends Fragment {
         int culoareActiv = 0xFF1A3C6E;
         int culoareInactiv = 0xFF1A2E4A;
 
-        btnRecente.setBackgroundColor(sortActiv == 0 ? culoareActiv : culoareInactiv);
+        btnRecente.setBackground(creazaFundalChip(sortActiv == 0 ? culoareActiv : culoareInactiv));
         btnRecente.setTextColor(sortActiv == 0 ? 0xFFFFFFFF : 0xFF7A9CC0);
 
-        btnDesc.setBackgroundColor(sortActiv == 1 ? culoareActiv : culoareInactiv);
+        btnDesc.setBackground(creazaFundalChip(sortActiv == 1 ? culoareActiv : culoareInactiv));
         btnDesc.setTextColor(sortActiv == 1 ? 0xFFFFFFFF : 0xFF7A9CC0);
 
-        btnAsc.setBackgroundColor(sortActiv == 2 ? culoareActiv : culoareInactiv);
+        btnAsc.setBackground(creazaFundalChip(sortActiv == 2 ? culoareActiv : culoareInactiv));
         btnAsc.setTextColor(sortActiv == 2 ? 0xFFFFFFFF : 0xFF7A9CC0);
     }
 
@@ -638,7 +612,7 @@ public class TransactionsFragment extends Fragment {
     }
 
     // ---------------------------------------------------------------
-    // FILTRE CATEGORII (tab Toate)
+    // FILTRE CATEGORII (tab Toate) — chip-uri rotunjite tip pastila
     // ---------------------------------------------------------------
 
     private void setupFiltre(View view, List<Tranzactie> dinLuna,
@@ -656,8 +630,8 @@ public class TransactionsFragment extends Fragment {
             chip.setText(cat);
             chip.setTextSize(11);
             chip.setTextColor(cat.equals("Toate") ? 0xFFFFFFFF : 0xFF7A9CC0);
-            chip.setBackgroundColor(cat.equals("Toate") ? 0xFF4A90D9 : 0xFF1A2E4A);
-            chip.setPadding(20, 8, 20, 8);
+            chip.setBackground(creazaFundalChip(cat.equals("Toate") ? 0xFF4A90D9 : 0xFF1A2E4A));
+            chip.setPadding(24, 10, 24, 10);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -669,10 +643,10 @@ public class TransactionsFragment extends Fragment {
                 for (int i = 0; i < layoutFiltre.getChildCount(); i++) {
                     TextView c = (TextView) layoutFiltre.getChildAt(i);
                     c.setTextColor(0xFF7A9CC0);
-                    c.setBackgroundColor(0xFF1A2E4A);
+                    c.setBackground(creazaFundalChip(0xFF1A2E4A));
                 }
                 chip.setTextColor(0xFFFFFFFF);
-                chip.setBackgroundColor(0xFF4A90D9);
+                chip.setBackground(creazaFundalChip(0xFF4A90D9));
 
                 List<Tranzactie> filtrate = new ArrayList<>();
                 if (cat.equals("Toate")) {
@@ -687,6 +661,22 @@ public class TransactionsFragment extends Fragment {
 
             layoutFiltre.addView(chip);
         }
+    }
+
+    // Creeaza un fundal rotunjit tip pastila pentru chip-urile de filtrare
+    private android.graphics.drawable.GradientDrawable creazaFundalChip(int culoare) {
+        android.graphics.drawable.GradientDrawable fundal = new android.graphics.drawable.GradientDrawable();
+        fundal.setColor(culoare);
+        fundal.setCornerRadius(40f);
+        return fundal;
+    }
+
+    // Creeaza un fundal usor rotunjit pentru header-ul fiecarei zile din lista
+    private android.graphics.drawable.GradientDrawable creazaFundalHeaderZi(int culoare) {
+        android.graphics.drawable.GradientDrawable fundal = new android.graphics.drawable.GradientDrawable();
+        fundal.setColor(culoare);
+        fundal.setCornerRadius(20f);
+        return fundal;
     }
 
     // ---------------------------------------------------------------
@@ -751,8 +741,8 @@ public class TransactionsFragment extends Fragment {
 
             LinearLayout header = new LinearLayout(getContext());
             header.setOrientation(LinearLayout.HORIZONTAL);
-            header.setBackgroundColor(0xFF1A2C4A);
-            header.setPadding(16, 12, 16, 12);
+            header.setBackground(creazaFundalHeaderZi(0xFF1A2C4A));
+            header.setPadding(16, 14, 16, 14);
             header.setGravity(android.view.Gravity.CENTER_VERTICAL);
             LinearLayout.LayoutParams ph = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -822,11 +812,11 @@ public class TransactionsFragment extends Fragment {
                 if (containerZi.getVisibility() == View.VISIBLE) {
                     containerZi.setVisibility(View.GONE);
                     tvSageata.setText("  ▼");
-                    header.setBackgroundColor(0xFF12203A);
+                    header.setBackground(creazaFundalHeaderZi(0xFF12203A));
                 } else {
                     containerZi.setVisibility(View.VISIBLE);
                     tvSageata.setText("  ▲");
-                    header.setBackgroundColor(0xFF1A2C4A);
+                    header.setBackground(creazaFundalHeaderZi(0xFF1A2C4A));
                 }
             });
 
