@@ -37,7 +37,12 @@ public class HomeFragment extends Fragment {
     private List<ContBancar> conturiCurente = new ArrayList<>();
     private int activeCard = 0;
     private float dragStartY = 0;
+    private float dragBaseY = 0;
     private List<View> cardViews = new ArrayList<>();
+
+    // Cat de mult se vede din cardul din spate, sus si jos, simetric.
+    // Egal cu padding-ul vertical al cardului, ca zona expusa sa fie doar culoare, fara text.
+    private static final int WALLET_PEEK_DP = 22;
 
     @Nullable
     @Override
@@ -174,15 +179,17 @@ public class HomeFragment extends Fragment {
 
             LinearLayout card = new LinearLayout(getContext());
             card.setOrientation(LinearLayout.VERTICAL);
-            card.setPadding(dp(14), dp(12), dp(14), dp(12));
+            // Padding sus/jos marit la WALLET_PEEK_DP — zona expusa cand cardul e in spate
+            // ramane goala (doar culoare), fara sa "muste" din text
+            card.setPadding(dp(14), dp(WALLET_PEEK_DP), dp(14), dp(WALLET_PEEK_DP));
 
             if (cont.isInghetat()) {
-                card.setBackgroundColor(Color.parseColor("#1C1C2E"));
+                card.setBackground(creazaFundalCard("#1C1C2E"));
             } else {
                 try {
-                    card.setBackgroundColor(Color.parseColor(cont.getCuloareBanca()));
+                    card.setBackground(creazaFundalCard(cont.getCuloareBanca()));
                 } catch (Exception e) {
-                    card.setBackgroundColor(Color.parseColor("#1A3C6E"));
+                    card.setBackground(creazaFundalCard("#1A3C6E"));
                 }
             }
 
@@ -295,9 +302,10 @@ public class HomeFragment extends Fragment {
             card.addView(tvNr);
             card.addView(rowBot);
 
-            // LayoutParams pentru card in FrameLayout — nou pentru fiecare card
+            // LayoutParams pentru card in FrameLayout — inaltime marita la 165dp
+            // ca sa compenseze padding-ul mai mare, fara sa strangem textul
             FrameLayout.LayoutParams fp = new FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.MATCH_PARENT, dp(120));
+                    FrameLayout.LayoutParams.MATCH_PARENT, dp(165));
             card.setLayoutParams(fp);
 
             frameWallet.addView(card);
@@ -321,9 +329,11 @@ public class HomeFragment extends Fragment {
             int offset = i - activeCard;
             int absOff = Math.abs(offset);
 
-            float targetY = dp(8 + offset * 16);
+            // Offset simetric: WALLET_PEEK_DP e atat gap-ul de sus al activului
+            // cat si fasia expusa a vecinilor — sus si jos se vede la fel de mult
+            float targetY = dp(WALLET_PEEK_DP + offset * WALLET_PEEK_DP);
             float targetScale = 1f - absOff * 0.055f;
-            float targetAlpha = absOff == 0 ? 1f : absOff == 1 ? 0.6f : 0.3f;
+            float targetAlpha = absOff == 0 ? 1f : absOff == 1 ? 0.7f : 0.3f;
             int targetZ = n - absOff;
 
             card.setZ(targetZ);
@@ -413,10 +423,20 @@ public class HomeFragment extends Fragment {
     private void setupWalletTouch(View view) {
         FrameLayout frame = view.findViewById(R.id.frameWallet);
         frame.setOnTouchListener((v, event) -> {
+            if (cardViews.isEmpty()) return true;
+            View cardActiv = cardViews.get(activeCard);
+
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     dragStartY = event.getY();
+                    dragBaseY = cardActiv.getTranslationY();
                     break;
+
+                case MotionEvent.ACTION_MOVE:
+                    float delta = event.getY() - dragStartY;
+                    cardActiv.setTranslationY(dragBaseY + delta);
+                    break;
+
                 case MotionEvent.ACTION_UP:
                     float diff = dragStartY - event.getY();
                     if (Math.abs(diff) > dp(20)) {
@@ -425,8 +445,8 @@ public class HomeFragment extends Fragment {
                         } else if (diff < 0 && activeCard > 0) {
                             activeCard--;
                         }
-                        renderWallet(view, true);
                     }
+                    renderWallet(view, true);
                     break;
             }
             return true;
@@ -438,6 +458,14 @@ public class HomeFragment extends Fragment {
     private int dp(int val) {
         float density = getResources().getDisplayMetrics().density;
         return Math.round(val * density);
+    }
+
+    // Creeaza un fundal rotunjit pentru cardul bancar, colorat cu culoarea bancii
+    private android.graphics.drawable.GradientDrawable creazaFundalCard(String culoareHex) {
+        android.graphics.drawable.GradientDrawable fundal = new android.graphics.drawable.GradientDrawable();
+        fundal.setColor(Color.parseColor(culoareHex));
+        fundal.setCornerRadius(dp(16));
+        return fundal;
     }
 
     // ─── RESTUL METODELOR NEATINSE ─────────────────────────────────────────────
