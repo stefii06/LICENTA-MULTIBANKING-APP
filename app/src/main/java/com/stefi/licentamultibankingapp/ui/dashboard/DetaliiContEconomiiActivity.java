@@ -2,6 +2,7 @@ package com.stefi.licentamultibankingapp.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -45,6 +46,7 @@ public class DetaliiContEconomiiActivity extends AppCompatActivity {
         TextView tvIconita = findViewById(R.id.tvIconitaCont);
         TextView tvNume = findViewById(R.id.tvNumeCont);
         TextView tvInfo = findViewById(R.id.tvInfoCont);
+        TextView tvBadgeOrigine = findViewById(R.id.tvBadgeOrigine);
         TextView tvSold = findViewById(R.id.tvSoldCont);
         TextView tvObiectiv = findViewById(R.id.tvObiectivCont);
         TextView tvProcent = findViewById(R.id.tvProcent);
@@ -54,17 +56,21 @@ public class DetaliiContEconomiiActivity extends AppCompatActivity {
         TextView tvEstimare = findViewById(R.id.tvEstimareData);
         TextView tvDepusTotal = findViewById(R.id.tvDepusTotal);
         TextView tvDobanda = findViewById(R.id.tvDobandaCastigata);
-        TextView tvZile = findViewById(R.id.tvZileRamase);
-        TextView tvDepunereSuma = findViewById(R.id.tvDepunereSuma);
-        TextView tvMetoda = findViewById(R.id.tvMetodaActiva);
+        LinearLayout layoutSavingsHacks = findViewById(R.id.layoutSavingsHacks);
 
         tvTitlu.setText(cont.getNumeCont());
         tvIconita.setText(cont.getIconita());
         tvNume.setText(cont.getNumeCont());
-        tvInfo.setText(cont.getNumeBanca() + " • " + cont.getDobanda() + "% • Manual");
+        tvInfo.setText(cont.getNumeBanca() + " • " + cont.getDobanda() + "%");
         tvSold.setText(String.format("%.2f RON", cont.getSold()));
-        tvDepunereSuma.setText(String.format("+%.2f RON", cont.getSold()));
-        tvMetoda.setText("Metoda: Manual");
+
+        if (cont.isCreatDeUtilizator()) {
+            tvBadgeOrigine.setText("Obiectiv de economisire · nu e cont bancar real");
+            layoutSavingsHacks.setVisibility(View.VISIBLE);
+        } else {
+            tvBadgeOrigine.setText("Cont importat de la " + cont.getNumeBanca());
+            layoutSavingsHacks.setVisibility(View.GONE);
+        }
 
         if (cont.getObiectiv() > 0) {
             tvObiectiv.setText("din " + String.format("%.2f", cont.getObiectiv()) + " RON obiectiv");
@@ -80,26 +86,28 @@ public class DetaliiContEconomiiActivity extends AppCompatActivity {
 
         double dobandaCastigata = cont.getSold() * cont.getDobanda() / 100 / 12;
         tvDobanda.setText(String.format("+%.2f RON", dobandaCastigata));
-        tvZile.setText("42");
     }
 
     private void setupButoane() {
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
 
-        findViewById(R.id.btnAdaugaBani).setOnClickListener(v ->
-                Toast.makeText(this, "Adauga bani - coming soon!", Toast.LENGTH_SHORT).show());
-
-        findViewById(R.id.btnRetrage).setOnClickListener(v ->
-                Toast.makeText(this, "Retrage - coming soon!", Toast.LENGTH_SHORT).show());
-
         findViewById(R.id.btnEditeaza).setOnClickListener(v -> {
-            Intent intent = new Intent(this, FormularEconomiiActivity.class);
-            intent.putExtra("iban", cont.getIban());
-            intent.putExtra("modEditare", true);
-            startActivity(intent);
+            if (cont.isCreatDeUtilizator()) {
+                Intent intent = new Intent(this, FormularEconomiiActivity.class);
+                intent.putExtra("iban", cont.getIban());
+                intent.putExtra("modEditare", true);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this,
+                        "In aplicatia reala, acest buton te-ar redirectiona catre aplicatia " + cont.getNumeBanca(),
+                        Toast.LENGTH_LONG).show();
+            }
         });
 
-        findViewById(R.id.btnSchimbaMetoda).setOnClickListener(v ->
-                Toast.makeText(this, "Schimba metoda - coming soon!", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.btnStergeCont).setOnClickListener(v ->
+                ContBancarRepository.getInstance().stergeContDinFirestore(cont.getId(), () -> {
+                    Toast.makeText(this, "Cont sters", Toast.LENGTH_SHORT).show();
+                    finish();
+                }));
     }
 }

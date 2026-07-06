@@ -23,7 +23,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_transactions"
-                android:background="#1A2E4A"
+                android:background="@drawable/bg_item_rounded"
                 android:padding="8dp"
                 android:layout_marginEnd="12dp"/>
 
@@ -44,9 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#1B5E20"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp">
+            android:background="@drawable/bg_card_rounded"
+            android:backgroundTint="#1B5E20"
+            android:padding="18dp"
+            android:layout_marginBottom="14dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,7 +63,8 @@
                     android:gravity="center"
                     android:text="✈"
                     android:textSize="24sp"
-                    android:background="#12203A"
+                    android:background="@drawable/bg_item_rounded"
+                    android:backgroundTint="#12203A"
                     android:layout_marginEnd="12dp"/>
 
                 <LinearLayout
@@ -92,6 +94,21 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvBadgeOrigine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obiectiv de economisire"
+                android:textColor="#4A90D9"
+                android:textSize="10sp"
+                android:background="@drawable/bg_item_rounded"
+                android:backgroundTint="#12203A"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
                 android:id="@+id/tvSoldCont"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,9 +133,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_item_rounded"
             android:padding="12dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,8 +201,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="#12203A"
-                android:padding="8dp">
+                android:background="@drawable/bg_item_rounded"
+                android:backgroundTint="#12203A"
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -213,15 +231,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
                 android:gravity="center"
                 android:layout_marginEnd="6dp">
 
@@ -249,8 +267,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
                 android:gravity="center"
                 android:layout_marginEnd="6dp">
 
@@ -273,34 +291,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Zile ramase"
-                    android:textColor="#7A9CC0"
-                    android:textSize="9sp"
-                    android:layout_marginBottom="3dp"/>
-
-                <TextView
-                    android:id="@+id/tvZileRamase"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="42"
-                    android:textColor="#4A90D9"
-                    android:textSize="13sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <!-- Butoane actiuni -->
@@ -308,29 +298,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
-
-            <Button
-                android:id="@+id/btnAdaugaBani"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="+ Adauga"
-                android:textColor="#4CAF50"
-                android:backgroundTint="#1B5E20"
-                android:textSize="12sp"
-                android:layout_marginEnd="6dp"/>
-
-            <Button
-                android:id="@+id/btnRetrage"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="Retrage"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#1A2E4A"
-                android:textSize="12sp"
-                android:layout_marginEnd="6dp"/>
+            android:layout_marginBottom="12dp">
 
             <Button
                 android:id="@+id/btnEditeaza"
@@ -338,108 +306,79 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="Editeaza"
-                android:textColor="#4A90D9"
-                android:backgroundTint="#1A2E4A"
-                android:textSize="12sp"/>
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_button_rounded"
+                android:backgroundTint="#1A3C6E"
+                android:textSize="13sp"
+                android:layout_marginEnd="8dp"/>
 
-        </LinearLayout>
-
-        <!-- Metoda activa -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="#1A2E4A"
-            android:padding="12dp"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:id="@+id/tvMetodaActiva"
+            <Button
+                android:id="@+id/btnStergeCont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="Metoda: Manual"
-                android:textColor="#7A9CC0"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/btnSchimbaMetoda"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Schimba"
-                android:textColor="#4A90D9"
-                android:textSize="12sp"/>
+                android:text="Sterge cont"
+                android:textColor="#E57373"
+                android:background="@drawable/bg_button_rounded"
+                android:backgroundTint="#1A2E4A"
+                android:textSize="13sp"/>
 
         </LinearLayout>
 
-        <!-- Savings Hacks -->
+        <!-- Savings Hacks - doar la obiectivele create manual -->
         <LinearLayout
             android:id="@+id/layoutSavingsHacks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#1A2E4A"
-            android:padding="12dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Savings Hacks active"
-                android:textColor="#7A9CC0"
-                android:textSize="11sp"
-                android:layout_marginBottom="8dp"/>
-
-            <LinearLayout
-                android:id="@+id/layoutHacksBadges"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
-
-        </LinearLayout>
-
-        <!-- Istoric depuneri -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Istoric depuneri"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#1A2E4A"
-            android:layout_marginBottom="8dp">
-
-            <!-- Depunere reala -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:padding="12dp">
+                android:layout_marginBottom="8dp">
 
-                <LinearLayout
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:background="#1B5E20"
-                    android:layout_marginEnd="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Savings Hacks"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textColor="#4CAF50"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="concept, nu afecteaza soldul"
+                    android:textColor="#7A9CC0"
+                    android:textSize="9sp"
+                    android:background="@drawable/bg_item_rounded"
+                    android:backgroundTint="#12203A"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"/>
 
-                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔄"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="10dp"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -448,143 +387,39 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvDepunereNume"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Depunere initiala"
+                        android:text="Round Up"
                         android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:id="@+id/tvDepunereData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Azi"
-                        android:textColor="#7A9CC0"
-                        android:textSize="10sp"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvDepunereSuma"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#4CAF50"
-                    android:textSize="13sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#12203A"/>
-
-            <!-- Round Up mock -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:background="#1B5E20"
-                    android:layout_marginEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🪙"
-                        android:textSize="14sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Round Up"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            android:layout_marginEnd="6dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="exemplu"
-                            android:textColor="#4A90D9"
-                            android:textSize="9sp"
-                            android:background="#12203A"
-                            android:paddingStart="4dp"
-                            android:paddingEnd="4dp"
-                            android:paddingTop="1dp"
-                            android:paddingBottom="1dp"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Plata Mancare rotunjita"
-                        android:textColor="#7A9CC0"
-                        android:textSize="10sp"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+3.00 RON"
-                    android:textColor="#4CAF50"
-                    android:textSize="13sp"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#12203A"/>
-
-            <!-- Dobanda mock -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:background="#1B5E20"
-                    android:layout_marginEnd="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="%"
-                        android:textColor="#4CAF50"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rotunjire automata la fiecare plata"
+                        android:textColor="#7A9CC0"
+                        android:textSize="10sp"/>
+
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤬"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="10dp"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -592,50 +427,103 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dobanda lunara"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            android:layout_marginEnd="6dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="exemplu"
-                            android:textColor="#4A90D9"
-                            android:textSize="9sp"
-                            android:background="#12203A"
-                            android:paddingStart="4dp"
-                            android:paddingEnd="4dp"
-                            android:paddingTop="1dp"
-                            android:paddingBottom="1dp"/>
-
-                    </LinearLayout>
+                        android:text="Swear Jar"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Calculata automat de banca"
+                        android:text="Taxa pentru cheltuieli pe o categorie aleasa"
                         android:textColor="#7A9CC0"
                         android:textSize="10sp"/>
 
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
+                android:layout_marginBottom="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+8.33 RON"
-                    android:textColor="#4CAF50"
-                    android:textSize="13sp"
-                    android:textStyle="bold"/>
+                    android:text="🎯"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No Spend Reward"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recompensa daca nu cheltui o saptamana"
+                        android:textColor="#7A9CC0"
+                        android:textSize="10sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🧠"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Smart Save"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Suma recomandata pe baza soldului"
+                        android:textColor="#7A9CC0"
+                        android:textSize="10sp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
