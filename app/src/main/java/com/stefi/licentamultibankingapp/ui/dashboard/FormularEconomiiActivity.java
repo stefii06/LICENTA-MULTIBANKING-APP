@@ -3,14 +3,11 @@ package com.stefi.licentamultibankingapp.ui.dashboard;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.stefi.licentamultibankingapp.R;
 import com.stefi.licentamultibankingapp.model.ContBancar;
@@ -20,12 +17,9 @@ public class FormularEconomiiActivity extends AppCompatActivity {
 
     private String iconitaSelectata = "✈";
     private String bancaSelectata = "";
-    private boolean metodaManual = true;
 
-    private TextInputEditText etNumeCont, etSumaInitiala, etObiectiv, etDataTinta, etSumaAutomata;
+    private TextInputEditText etNumeCont, etSumaInitiala, etObiectiv, etDataTinta;
     private TextView tvDobanda, tvCastigEstimat, tvBancaSelectata;
-    private SwitchMaterial switchRoundUp, switchSwearJar, switchNoSpend, switchSmartSave;
-    private SwitchMaterial switchBlocare, switchReminder;
 
     private String[] banci = {"BCR", "ING", "BRD", "Raiffeisen"};
     private double[] dobanziBanci = {4.0, 3.5, 3.8, 4.2};
@@ -39,7 +33,6 @@ public class FormularEconomiiActivity extends AppCompatActivity {
         initViews();
         setupIconite();
         setupBanca();
-        setupMetodaDepunere();
         setupDobandaCalculata();
 
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
@@ -53,16 +46,9 @@ public class FormularEconomiiActivity extends AppCompatActivity {
         etSumaInitiala = findViewById(R.id.etSumaInitiala);
         etObiectiv = findViewById(R.id.etObiectiv);
         etDataTinta = findViewById(R.id.etDataTinta);
-        etSumaAutomata = findViewById(R.id.etSumaAutomata);
         tvDobanda = findViewById(R.id.tvDobanda);
         tvCastigEstimat = findViewById(R.id.tvCastigEstimat);
         tvBancaSelectata = findViewById(R.id.tvBancaSelectata);
-        switchRoundUp = findViewById(R.id.switchRoundUp);
-        switchSwearJar = findViewById(R.id.switchSwearJar);
-        switchNoSpend = findViewById(R.id.switchNoSpend);
-        switchSmartSave = findViewById(R.id.switchSmartSave);
-        switchBlocare = findViewById(R.id.switchBlocare);
-        switchReminder = findViewById(R.id.switchReminder);
     }
 
     private void setupIconite() {
@@ -96,28 +82,6 @@ public class FormularEconomiiActivity extends AppCompatActivity {
             tvDobanda.setText(String.format("%.1f%%", dobanziBanci[bancaIndex]));
             calculeazaCastig();
         });
-    }
-
-    private void setupMetodaDepunere() {
-        LinearLayout optiuneManual = findViewById(R.id.optiuneManual);
-        LinearLayout optiuneAutomat = findViewById(R.id.optiuneAutomat);
-        View tilSumaAutomata = findViewById(R.id.tilSumaAutomata);
-
-        optiuneManual.setOnClickListener(v -> {
-            metodaManual = true;
-            optiuneManual.setBackgroundColor(0xFF1A3C6E);
-            optiuneAutomat.setBackgroundColor(0xFF1A2E4A);
-            tilSumaAutomata.setVisibility(View.GONE);
-        });
-
-        optiuneAutomat.setOnClickListener(v -> {
-            metodaManual = false;
-            optiuneAutomat.setBackgroundColor(0xFF1A3C6E);
-            optiuneManual.setBackgroundColor(0xFF1A2E4A);
-            tilSumaAutomata.setVisibility(View.VISIBLE);
-        });
-
-        optiuneManual.setBackgroundColor(0xFF1A3C6E);
     }
 
     private void setupDobandaCalculata() {
@@ -171,7 +135,8 @@ public class FormularEconomiiActivity extends AppCompatActivity {
                 "Ioana Stefania", "Economii",
                 ContBancar.TipCont.ECONOMII,
                 nume, iconitaSelectata,
-                obiectiv, dobanda, dataTinta
+                obiectiv, dobanda, dataTinta,
+                true
         );
 
         ContBancarRepository.getInstance().adaugaCont(contNou,null);
