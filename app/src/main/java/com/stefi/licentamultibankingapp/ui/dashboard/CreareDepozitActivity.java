@@ -161,7 +161,7 @@ public class CreareDepozitActivity extends AppCompatActivity {
                 "Ioana Stefania", "Depozit",
                 ContBancar.TipCont.DEPOZIT,
                 numeDepozit, "🏦",
-                suma + castig, dobandaSelectata, dataScadenta
+                suma + castig, dobandaSelectata, dataScadenta, true
         );
 
         ContBancarRepository.getInstance().adaugaCont(depozit,null);

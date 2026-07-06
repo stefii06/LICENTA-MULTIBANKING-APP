@@ -194,7 +194,7 @@ public class AdaugaContBottomSheet extends BottomSheetDialogFragment {
                 "💳",
                 obiectiv,
                 dobanda,
-                dataTinta
+                dataTinta,false
         );
     }
 
