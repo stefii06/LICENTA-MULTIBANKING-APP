@@ -20,6 +20,7 @@ public class ContBancar {
     private double obiectiv;
     private double dobanda;
     private String dataTinta;
+    private boolean creatDeUtilizator = false;
 
 
     private String id;
@@ -47,7 +48,8 @@ public class ContBancar {
     public ContBancar(String numeBanca, String iban, double sold, String valuta,
                       String culoareBanca, String titular, String tipCard,
                       TipCont tipCont, String numeCont, String iconita,
-                      double obiectiv, double dobanda, String dataTinta) {
+                      double obiectiv, double dobanda, String dataTinta,
+                      boolean creatDeUtilizator) {
         this.numeBanca = numeBanca;
         this.iban = iban;
         this.sold = sold;
@@ -61,6 +63,7 @@ public class ContBancar {
         this.obiectiv = obiectiv;
         this.dobanda = dobanda;
         this.dataTinta = dataTinta;
+        this.creatDeUtilizator = creatDeUtilizator;
     }
 
     public String getNumeBanca() { return numeBanca; }
@@ -81,4 +84,5 @@ public class ContBancar {
     public double getObiectiv() { return obiectiv; }
     public double getDobanda() { return dobanda; }
     public String getDataTinta() { return dataTinta; }
+    public boolean isCreatDeUtilizator() { return creatDeUtilizator; }
 }

@@ -108,6 +108,7 @@ public class ContBancarRepository {
     // Converteste DocumentSnapshot in ContBancar
     private ContBancar documentToContBancar(com.google.firebase.firestore.DocumentSnapshot doc) {
         String tipContStr = doc.getString("tipCont");
+        Boolean creatDeUtilizator = doc.getBoolean("creatDeUtilizator");
         ContBancar.TipCont tipCont = ContBancar.TipCont.CURENT;
         if ("ECONOMII".equals(tipContStr)) tipCont = ContBancar.TipCont.ECONOMII;
         else if ("DEPOZIT".equals(tipContStr)) tipCont = ContBancar.TipCont.DEPOZIT;
@@ -129,7 +130,8 @@ public class ContBancarRepository {
                 doc.getString("iconita"),
                 obiectiv != null ? obiectiv : 0.0,
                 dobanda != null ? dobanda : 0.0,
-                doc.getString("dataTinta")
+                doc.getString("dataTinta"),
+                creatDeUtilizator != null && creatDeUtilizator
         );
         cont.setId(doc.getId());
 
@@ -156,6 +158,7 @@ public class ContBancarRepository {
         map.put("dobanda", cont.getDobanda());
         map.put("dataTinta", cont.getDataTinta());
         map.put("inghetat", cont.isInghetat());
+        map.put("creatDeUtilizator", cont.isCreatDeUtilizator());
         return map;
     }
 
