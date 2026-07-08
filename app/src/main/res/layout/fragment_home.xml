@@ -473,47 +473,8 @@
 
         </LinearLayout>
 
-        <!-- Banner tranzactii -->
-        <LinearLayout
-            android:id="@+id/layoutBannerTranzactii"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:background="#1A2E4A"
-            android:padding="16dp"
-            android:layout_marginBottom="20dp">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tranzacții"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vezi istoricul complet"
-                    android:textColor="#7A9CC0"
-                    android:textSize="11sp"/>
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_transactions"
-                android:padding="2dp"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

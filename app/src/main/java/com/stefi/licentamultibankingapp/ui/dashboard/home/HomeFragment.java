@@ -111,7 +111,10 @@ public class HomeFragment extends Fragment {
         // Butoane rapide
         view.findViewById(R.id.btnTrimite).setOnClickListener(v -> {
             TrimiteBottomSheet bottomSheet = new TrimiteBottomSheet();
-            bottomSheet.setCallback(() -> actualizeazaSoldTotal(view));
+            bottomSheet.setCallback(() -> {
+                actualizeazaSoldTotal(view);
+                if (cardVisible) updateInfoText(view);
+            });
             bottomSheet.show(getParentFragmentManager(), "TrimiteBottomSheet");
         });
 
@@ -131,8 +134,7 @@ public class HomeFragment extends Fragment {
             bottomSheet.show(getParentFragmentManager(), "AdaugaContBottomSheet");
         });
 
-        view.findViewById(R.id.layoutBannerTranzactii).setOnClickListener(v ->
-                Toast.makeText(getContext(), "Tranzactii - coming soon!", Toast.LENGTH_SHORT).show());
+
 
         actualizeazaHeader(view);
         actualizeazaSoldTotal(view);
