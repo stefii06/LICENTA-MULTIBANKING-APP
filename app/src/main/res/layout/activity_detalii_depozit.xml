@@ -23,7 +23,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_transactions"
-                android:background="#1A2E4A"
+                android:background="@drawable/bg_item_rounded"
                 android:padding="8dp"
                 android:layout_marginEnd="12dp"/>
 
@@ -43,9 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#0D47A1"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp">
+            android:background="@drawable/bg_card_rounded"
+            android:backgroundTint="#0D47A1"
+            android:padding="18dp"
+            android:layout_marginBottom="14dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,7 +62,8 @@
                     android:gravity="center"
                     android:text="🏦"
                     android:textSize="24sp"
-                    android:background="#12203A"
+                    android:background="@drawable/bg_item_rounded"
+                    android:backgroundTint="#12203A"
                     android:layout_marginEnd="12dp"/>
 
                 <LinearLayout
@@ -91,6 +93,21 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvBadgeOrigineDepozit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Depozit creat de tine"
+                android:textColor="#B0C8F0"
+                android:textSize="10sp"
+                android:background="@drawable/bg_item_rounded"
+                android:backgroundTint="#12203A"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
                 android:id="@+id/tvSumaDepozit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,15 +131,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_item_rounded"
             android:padding="14dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -208,15 +225,16 @@
                 android:max="100"
                 android:progress="2"
                 android:progressTint="#4A90D9"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="12dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="#12203A"
-                android:padding="10dp">
+                android:background="@drawable/bg_item_rounded"
+                android:backgroundTint="#12203A"
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -244,15 +262,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
                 android:gravity="center"
                 android:layout_marginEnd="6dp">
 
@@ -280,8 +298,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
                 android:gravity="center"
                 android:layout_marginEnd="6dp">
 
@@ -309,8 +327,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="#1A2E4A"
-                android:padding="10dp"
+                android:background="@drawable/bg_item_rounded"
+                android:padding="12dp"
                 android:gravity="center">
 
                 <TextView
@@ -340,9 +358,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_item_rounded"
             android:padding="14dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -375,9 +393,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#4A0000"
-            android:padding="14dp"
-            android:layout_marginBottom="10dp">
+            android:background="@drawable/bg_card_rounded"
+            android:backgroundTint="#4A0000"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -417,7 +436,7 @@
                 android:layout_height="48dp"
                 android:text="Lichideaza anticipat"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="#E53935"
+                android:background="@drawable/bg_button_red_rounded"
                 android:textSize="13sp"/>
 
         </LinearLayout>
@@ -430,13 +449,13 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="12dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#1A2E4A">
+            android:background="@drawable/bg_item_rounded">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -449,7 +468,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:gravity="center"
-                    android:background="#0D47A1"
+                    android:background="@drawable/bg_item_rounded"
+                    android:backgroundTint="#0D47A1"
                     android:layout_marginEnd="10dp">
 
                     <TextView
@@ -509,7 +529,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:gravity="center"
-                    android:background="#1B5E20"
+                    android:background="@drawable/bg_item_rounded"
+                    android:backgroundTint="#1B5E20"
                     android:layout_marginEnd="10dp">
 
                     <TextView
@@ -528,33 +549,12 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dobanda la scadenta"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp"
-                            android:layout_marginEnd="6dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="exemplu"
-                            android:textColor="#4A90D9"
-                            android:textSize="9sp"
-                            android:background="#12203A"
-                            android:paddingStart="4dp"
-                            android:paddingEnd="4dp"
-                            android:paddingTop="1dp"
-                            android:paddingBottom="1dp"/>
-
-                    </LinearLayout>
+                        android:text="Dobanda la scadenta"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -23,7 +23,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_transactions"
-                android:background="#1A2E4A"
+                android:background="@drawable/bg_item_rounded"
                 android:padding="8dp"
                 android:layout_marginEnd="12dp"/>
 
@@ -60,9 +60,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_item_rounded"
             android:padding="14dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="18dp">
 
             <TextView
                 android:id="@+id/tvBancaSelectataDepozit"
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="0"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="18dp"
             app:boxStrokeColor="#1A3C6E"
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="18dp">
 
             <LinearLayout
                 android:id="@+id/btn3Luni"
@@ -130,7 +130,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#1A2E4A"
+                android:background="@drawable/bg_item_rounded"
                 android:layout_marginEnd="6dp">
 
                 <TextView
@@ -157,7 +157,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#1A2E4A"
+                android:background="@drawable/bg_item_rounded"
                 android:layout_marginEnd="6dp">
 
                 <TextView
@@ -184,7 +184,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#0D47A1"
+                android:background="@drawable/bg_item_selected_blue_rounded"
                 android:layout_marginEnd="6dp">
 
                 <TextView
@@ -211,7 +211,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="#1A2E4A">
+                android:background="@drawable/bg_item_rounded">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -237,9 +237,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#0D47A1"
-            android:padding="14dp"
-            android:layout_marginBottom="16dp">
+            android:background="@drawable/bg_card_rounded"
+            android:backgroundTint="#0D47A1"
+            android:padding="16dp"
+            android:layout_marginBottom="18dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -354,9 +355,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#1A2E4A"
+            android:background="@drawable/bg_item_rounded"
             android:padding="14dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="18dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -401,8 +402,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="#4A0000"
-            android:padding="14dp"
+            android:background="@drawable/bg_card_rounded"
+            android:backgroundTint="#4A0000"
+            android:padding="16dp"
             android:layout_marginBottom="24dp">
 
             <TextView
@@ -429,7 +431,7 @@
             android:layout_height="56dp"
             android:text="Deschide depozit"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#4A90D9"
+            android:background="@drawable/bg_button_blue_rounded"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"/>
 
@@ -439,7 +441,7 @@
             android:layout_height="56dp"
             android:text="Anuleaza"
             android:textColor="#E53935"
-            android:backgroundTint="#1A2E4A"
+            android:background="@drawable/bg_button_rounded"
             android:textSize="16sp"/>
 
     </LinearLayout>
