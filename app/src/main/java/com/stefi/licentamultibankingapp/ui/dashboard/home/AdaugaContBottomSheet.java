@@ -131,26 +131,19 @@ public class AdaugaContBottomSheet extends BottomSheetDialogFragment {
         }, 3000);
     }
 
-    // Genereaza random 1-3 conturi pentru banca aleasa
+    // Genereaza mereu toate 3 tipurile de conturi pentru banca aleasa
     private List<ContBancar> genereazaConturi(String banca, String culoare) {
         List<ContBancar> lista = new ArrayList<>();
         Random random = new Random();
 
-        // Intotdeauna generam cont curent
         lista.add(creeazaCont(banca, culoare, "Cont curent", "RON",
                 2000 + random.nextInt(4000)));
 
-        // 60% sansa de cont economii
-        if (random.nextFloat() < 0.6f) {
-            lista.add(creeazaCont(banca, culoare, "Economii", "RON",
-                    1000 + random.nextInt(9000)));
-        }
+        lista.add(creeazaCont(banca, culoare, "Economii", "RON",
+                1000 + random.nextInt(9000)));
 
-        // 40% sansa de depozit
-        if (random.nextFloat() < 0.4f) {
-            lista.add(creeazaCont(banca, culoare, "Depozit 12 luni", "RON",
-                    5000 + random.nextInt(15000)));
-        }
+        lista.add(creeazaCont(banca, culoare, "Depozit 12 luni", "RON",
+                5000 + random.nextInt(15000)));
 
         return lista;
     }
