@@ -61,23 +61,22 @@ public class OnboardingFragment4 extends Fragment {
 
         Button btnMergi = view.findViewById(R.id.btnMergiLaFinMind);
         btnMergi.setOnClickListener(v -> {
-            // Salvam contul in Firestore
-            salveazaContInFirestore(banca, iban, sold, culoare, titular, nrCard);
-
-            // Generam tranzactii demo pentru acest cont
+            // Generam tranzactii demo si venituri - nu afecteaza afisarea soldului, pot rula in fundal
             genereazaTranzactiiDemo(banca);
-
-            // Salvam veniturile in Firestore
             salveazaVenituri();
 
-            if (getActivity() instanceof OnboardingActivity) {
-                ((OnboardingActivity) getActivity()).onboardingFinalizat();
-            }
+            // Navigam catre Dashboard DOAR dupa ce contul e salvat si adaugat local
+            salveazaContInFirestore(banca, iban, sold, culoare, titular, nrCard, () -> {
+                if (getActivity() instanceof OnboardingActivity) {
+                    ((OnboardingActivity) getActivity()).onboardingFinalizat();
+                }
+            });
         });
     }
 
     private void salveazaContInFirestore(String banca, String iban, double sold,
-                                         String culoare, String titular, String nrCard) {
+                                         String culoare, String titular, String nrCard,
+                                         Runnable onSalvat) {
         Map<String, Object> cont = new HashMap<>();
         cont.put("numeBanca", banca);
         cont.put("iban", iban);
@@ -104,6 +103,12 @@ public class OnboardingFragment4 extends Fragment {
                             banca, iban, sold, "RON", culoare, titular, "Visa");
                     contLocal.setId(ref.getId());
                     ContBancarRepository.getInstance().getConturi().add(contLocal);
+
+                    if (onSalvat != null) onSalvat.run();
+                })
+                .addOnFailureListener(e -> {
+                    // Chiar daca esueaza, nu blocam utilizatorul in onboarding
+                    if (onSalvat != null) onSalvat.run();
                 });
     }
 
