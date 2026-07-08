@@ -69,11 +69,14 @@ public class SignInPinActivity extends AppCompatActivity {
         // FIX 1: biometrie reala in loc de Toast
         tvUseBiometric.setOnClickListener(v -> {
             BiometricManager bm = BiometricManager.from(this);
-            if (bm.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
-                    == BiometricManager.BIOMETRIC_SUCCESS) {
+            int autentificatoriAcceptati = BiometricManager.Authenticators.BIOMETRIC_STRONG
+                    | BiometricManager.Authenticators.BIOMETRIC_WEAK;
+            int cod = bm.canAuthenticate(autentificatoriAcceptati);
+            if (cod == BiometricManager.BIOMETRIC_SUCCESS) {
                 showBiometricPrompt();
             } else {
-                Toast.makeText(this, "Biometria nu este disponibilă.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Biometria nu este disponibilă. Cod: " + cod,
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -141,12 +144,34 @@ public class SignInPinActivity extends AppCompatActivity {
                     @Override
                     public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
-                        android.content.Intent intent = new android.content.Intent(
-                                SignInPinActivity.this,
-                                com.stefi.licentamultibankingapp.ui.dashboard.DashboardActivity.class);
-                        intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK |
-                                android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+
+                        // Incarcam datele din Firestore inainte sa deschidem Dashboard-ul,
+                        // la fel ca la verificarea prin PIN
+                        com.stefi.licentamultibankingapp.utils.FirestoreManager.reset();
+                        com.stefi.licentamultibankingapp.model.ContBancarRepository.reset();
+                        com.stefi.licentamultibankingapp.model.TranzactieRepository.reset();
+                        com.stefi.licentamultibankingapp.model.AbonamentRepository.reset();
+                        com.stefi.licentamultibankingapp.utils.FirestoreManager.getInstance();
+
+                        com.stefi.licentamultibankingapp.utils.DemoDataGenerator.verificaSiInitializeaza("", "", () -> {
+                            com.stefi.licentamultibankingapp.model.ContBancarRepository.getInstance().incarcaConturi(() -> {
+                                com.stefi.licentamultibankingapp.model.TranzactieRepository.getInstance().incarcaTranzactii(() -> {
+                                    com.stefi.licentamultibankingapp.model.AbonamentRepository.getInstance().incarcaAbonamente(() -> {
+                                        com.stefi.licentamultibankingapp.model.MockDataGenerator.incarcaVenituri(new com.stefi.licentamultibankingapp.model.MockDataGenerator.OnDateIncarcate() {
+                                            @Override
+                                            public void onIncarcate() {
+                                                android.content.Intent intent = new android.content.Intent(
+                                                        SignInPinActivity.this,
+                                                        com.stefi.licentamultibankingapp.ui.dashboard.DashboardActivity.class);
+                                                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK |
+                                                        android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                            }
+                                        });
+                                    });
+                                });
+                            });
+                        });
                     }
 
                     @Override
@@ -161,6 +186,8 @@ public class SignInPinActivity extends AppCompatActivity {
                 .setTitle("Autentificare biometrică")
                 .setSubtitle("Folosește amprenta pentru a te conecta")
                 .setNegativeButtonText("Anulează")
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG
+                        | BiometricManager.Authenticators.BIOMETRIC_WEAK)
                 .build();
 
         prompt.authenticate(info);

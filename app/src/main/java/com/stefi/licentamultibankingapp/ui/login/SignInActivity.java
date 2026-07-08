@@ -10,9 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +23,6 @@ import com.stefi.licentamultibankingapp.ui.login.onboarding.OnboardingActivity;
 import com.stefi.licentamultibankingapp.utils.DemoDataGenerator;
 import com.stefi.licentamultibankingapp.utils.FirestoreManager;
 
-import java.util.concurrent.Executor;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -168,21 +164,8 @@ public class SignInActivity extends AppCompatActivity {
                     });
         });
 
-        btnQuickAuth.setOnClickListener(v -> {
-            String lastUserId = getSharedPreferences("finmind_prefs", MODE_PRIVATE)
-                    .getString("last_user_id", "");
-            boolean biometricEnabled = getSharedPreferences("finmind_prefs", MODE_PRIVATE)
-                    .getBoolean("biometric_enabled_" + lastUserId, false);
-
-            BiometricManager biometricManager = BiometricManager.from(this);
-            if (biometricEnabled &&
-                    biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
-                            == BiometricManager.BIOMETRIC_SUCCESS) {
-                showBiometricPrompt();
-            } else {
-                startActivity(new Intent(this, SignInPinActivity.class));
-            }
-        });
+        btnQuickAuth.setOnClickListener(v ->
+                startActivity(new Intent(this, SignInPinActivity.class)));
 
         tvForgotPassword.setOnClickListener(v ->
                 Toast.makeText(this, "Funcționalitate disponibilă în curând!", Toast.LENGTH_SHORT).show());
@@ -205,72 +188,5 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    private void showBiometricPrompt() {
-        Executor executor = ContextCompat.getMainExecutor(this);
-        BiometricPrompt biometricPrompt = new BiometricPrompt(this, executor,
-                new BiometricPrompt.AuthenticationCallback() {
-                    @Override
-                    public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
-                        super.onAuthenticationSucceeded(result);
 
-                        String lastUserId = getSharedPreferences("finmind_prefs", MODE_PRIVATE)
-                                .getString("last_user_id", "");
-
-                        if (lastUserId.isEmpty()) {
-                            Toast.makeText(SignInActivity.this,
-                                    "Autentifică-te mai întâi cu email și parolă.",
-                                    Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        progressBarSignIn.setVisibility(View.VISIBLE);
-                        btnSignIn.setEnabled(false);
-
-                        FirestoreManager.reset();
-                        ContBancarRepository.reset();
-                        TranzactieRepository.reset();
-                        AbonamentRepository.reset();
-                        FirestoreManager.getInstance();
-
-                        DemoDataGenerator.verificaSiInitializeaza("", "", () -> {
-                            ContBancarRepository.getInstance().incarcaConturi(() -> {
-                                TranzactieRepository.getInstance().incarcaTranzactii(() -> {
-                                    AbonamentRepository.getInstance().incarcaAbonamente(() -> {
-                                        MockDataGenerator.incarcaVenituri(new MockDataGenerator.OnDateIncarcate() {
-                                            @Override
-                                            public void onIncarcate() {
-                                                progressBarSignIn.setVisibility(View.GONE);
-                                                boolean onboardingCompletat = getSharedPreferences("finmind_prefs", MODE_PRIVATE)
-                                                        .getBoolean("onboarding_completat_" + lastUserId, false);
-                                                if (onboardingCompletat) {
-                                                    startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
-                                                } else {
-                                                    startActivity(new Intent(SignInActivity.this, OnboardingActivity.class));
-                                                }
-                                                finish();
-                                            }
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    }
-
-                    @Override
-                    public void onAuthenticationFailed() {
-                        super.onAuthenticationFailed();
-                        Toast.makeText(SignInActivity.this,
-                                "Autentificare eșuată. Încearcă din nou.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Autentificare biometrică")
-                .setSubtitle("Folosește amprenta pentru a te conecta")
-                .setNegativeButtonText("Anulează")
-                .build();
-
-        biometricPrompt.authenticate(promptInfo);
-    }
 }
