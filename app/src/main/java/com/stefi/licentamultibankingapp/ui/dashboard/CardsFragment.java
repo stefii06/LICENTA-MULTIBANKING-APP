@@ -521,7 +521,7 @@ public class CardsFragment extends Fragment {
         });
 
         view.findViewById(R.id.btnAdaugaContEconomii).setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), CreareContEconomiiActivity.class)));
+                startActivity(new Intent(getActivity(), FormularEconomiiActivity.class)));
 
         view.findViewById(R.id.btnAdaugaContDepozit).setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), CreareDepozitActivity.class)));
